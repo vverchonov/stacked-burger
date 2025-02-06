@@ -9,7 +9,7 @@ const WeAreBlock = () => {
         <div className="flex flex-col md:flex-row items-start">
           {/* Left Content */}
           <div className="md:w-6/12 px-4 space-y-12 lg:px-32">
-            <h2 className="text-[#F06002] text-8xl lg:text-[180px] font-bold leading-none">
+            <h2 className="text-[#F06002] text-8xl lg:text-[140px] font-bold leading-none">
               WE ARE
             </h2>
             
