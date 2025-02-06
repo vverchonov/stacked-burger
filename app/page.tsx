@@ -1,4 +1,3 @@
-import Image from "next/image";
 import WelcomeBlock from "./blocks/welcome-block";
 import DishesBlock from "./blocks/dishes-block";
 import WeAreBlock from "./blocks/we-are-block";

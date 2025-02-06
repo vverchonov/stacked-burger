@@ -5,6 +5,12 @@ import Image from 'next/image';
 import { useState } from 'react';
 import { usePathname } from 'next/navigation';
 
+interface NavLink {
+  href: string;
+  label: string;
+  onClick?: () => void;
+}
+
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const pathname = usePathname();
@@ -17,9 +23,9 @@ const Navbar = () => {
     }
   };
 
-  const homeLink = { href: '/', label: 'HOME' };
+  const homeLink: NavLink = { href: '/', label: 'HOME' };
   
-  const mainNavLinks = [
+  const mainNavLinks: NavLink[] = [
     { href: '#locations', label: 'LOCATIONS', onClick: () => scrollToSection('locations-block') },
     { href: '#menu', label: 'MENU', onClick: () => scrollToSection('menu-block') },
     { href: '#about', label: 'ABOUT', onClick: () => scrollToSection('we-are-block') },
