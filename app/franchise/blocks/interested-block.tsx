@@ -29,7 +29,7 @@ const InterestedBlock = () => {
       <div className="container mx-auto px-4">
         <div className="max-w-3xl mx-auto">
           {/* Title */}
-          <h2 className="text-[#F06002] text-5xl lg:text-8xl font-bold mb-16 text-center">
+          <h2 className="text-[#F06002] font-arial-black text-5xl lg:text-8xl font-bold mb-16 text-center">
             INTERESTED?
           </h2>
 

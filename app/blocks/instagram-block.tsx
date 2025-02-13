@@ -29,13 +29,13 @@ const InstagramBlock = () => {
           {/* Right Side - Text and QR */}
           <div className="w-full md:w-1/3 flex flex-col justify-center">
             <div className="space-y-4 mb-8 md:text-left text-center">
-              <h2 className="text-5xl md:text-6xl font-bold">
+              <h2 className="text-5xl md:text-6xl font-bold font-arial-black">
                 <span className="text-white">FOLLOW</span>
                 <span className="text-[#F06002]">US</span>
               </h2>
-              <h2 className="text-white text-5xl md:text-6xl font-bold">ON</h2>
+              <h2 className="text-white text-5xl md:text-6xl font-bold font-arial-black">ON</h2>
               <h3 
-                className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-[#9747FF] to-[#FF3C8C] inline-block text-transparent bg-clip-text"
+                className="text-4xl font-arial-black md:text-5xl font-bold bg-gradient-to-r from-[#9747FF] to-[#FF3C8C] inline-block text-transparent bg-clip-text"
               >
                 INSTAGRAM
               </h3>

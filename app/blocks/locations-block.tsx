@@ -44,7 +44,7 @@ const LocationsBlock = () => {
           <div className="flex flex-col md:flex-row items-start gap-2 mx-auto">
             {/* Map */}
             <div className="md:w-1/2 w-full">
-            <h2 className="text-[#F06002] text-7xl font-bold mb-2">
+            <h2 className="text-[#F06002] text-7xl font-arial-black font-bold mb-2">
                 TRY IT ON
             </h2>
               <div 
@@ -69,7 +69,7 @@ const LocationsBlock = () => {
 
             {/* Location Info */}
             <div className="md:w-1/2 space-y-4 flex justify-center flex-col my-auto mx-4">
-              <h3 className="text-6xl font-bold">
+              <h3 className="text-4xl lg:text-6xl font-bold font-arial-black">
                 <span className="text-black">KING</span>
                 <span className="text-[#F06002]">ST.</span>
               </h3>
@@ -84,8 +84,8 @@ const LocationsBlock = () => {
           <div className="flex flex-col-reverse md:flex-row items-start gap-2">
             {/* Location Info */}
             <div className="md:w-1/2 space-y-4 flex justify-center text-right flex-col my-auto mx-4">
-              <h3 className="text-6xl font-bold">
-                <span className="text-black">CHERRYHILL</span>
+              <h3 className="text-4xl lg:text-6xl font-bold font-arial-black">
+                <span className="text-black ">CHERRYHILL</span>
                 <br />
                 <span className="text-[#F06002]">MALL</span>
               </h3>
@@ -97,7 +97,7 @@ const LocationsBlock = () => {
 
             {/* Map */}
             <div className="md:w-1/2 w-full">
-            <h2 className="text-[#F06002] text-left text-7xl font-bold mb-2">
+            <h2 className="text-[#F06002] font-arial-black text-left text-7xl font-bold mb-2">
                 AND
             </h2>
               <div 

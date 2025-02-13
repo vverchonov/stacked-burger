@@ -9,28 +9,56 @@ const dishes = [
     title: 'CHICKEN BITES',
     description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit,t',
     price: 12.99,
-    imageUrl: '/dishes/chicken-bites.jpg'
+    imageUrl: '/sides/Layer2.webp'
   },
   {
     id: 2,
     title: 'CHICKEN BITES',
     description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit,t',
     price: 12.99,
-    imageUrl: '/dishes/chicken-bites.jpg'
+       imageUrl: '/sides/Layer3.webp'
   },
   {
     id: 3,
     title: 'CHICKEN BITES',
     description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit,t',
     price: 12.99,
-    imageUrl: '/dishes/chicken-bites.jpg'
+    imageUrl: '/sides/Layer4.webp'
   },
   {
     id: 4,
     title: 'CHICKEN BITES',
     description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit,t',
     price: 12.99,
-    imageUrl: '/dishes/chicken-bites.jpg'
+       imageUrl: '/sides/Layer5.webp'
+  },
+  {
+    id: 5,
+    title: 'CHICKEN BITES',
+    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit,t',
+    price: 12.99,
+       imageUrl: '/sides/Layer6.webp'
+  },
+  {
+    id: 6,
+    title: 'CHICKEN BITES',
+    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit,t',
+    price: 12.99,
+       imageUrl: '/sides/Layer7.webp'
+  },
+  {
+    id: 7,
+    title: 'CHICKEN BITES',
+    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit,t',
+    price: 12.99,
+       imageUrl: '/sides/Layer8.webp'
+  },
+  {
+    id: 8,
+    title: 'CHICKEN BITES',
+    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit,t',
+    price: 12.99,
+       imageUrl: '/sides/Layer9.webp'
   }
 ];
 
@@ -39,7 +67,7 @@ const DishesBlock = () => {
     <div className="bg-[#1C1C1C] py-12 overflow-hidden">
       <div className="">
         {/* Title */}
-        <h2 className="text-white text-4xl font-bold text-right mb-[-5px]">
+        <h2 className="text-white font-arial-black text-4xl font-bold text-right mb-[-5px]">
           SIDES, DRINKS, BITES, DESSERTS ...
         </h2>
 

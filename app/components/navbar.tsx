@@ -56,7 +56,7 @@ const Navbar = () => {
                   className="mr-3"
                   priority
                 />
-                <span className="text-2xl font-bold tracking-wide">STACKED BURGER</span>
+                <span className="text-2xl font-bold tracking-wide font-arial-black">STACKED BURGER</span>
               </div>
             </Link>
           </div>
@@ -69,7 +69,7 @@ const Navbar = () => {
                   <button
                     key={link.href}
                     onClick={link.onClick}
-                    className="hover:text-[#F06002] hover:underline transition-colors duration-200"
+                    className="hover:text-[#F06002] text-xl hover:underline transition-colors duration-200"
                   >
                     {link.label}
                   </button>
@@ -77,7 +77,7 @@ const Navbar = () => {
                   <Link
                     key={link.href}
                     href={link.href}
-                    className="hover:text-[#F06002] hover:underline transition-colors duration-200"
+                    className="hover:text-[#F06002] text-xl hover:underline transition-colors duration-200"
                   >
                     {link.label}
                   </Link>

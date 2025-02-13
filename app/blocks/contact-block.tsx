@@ -26,7 +26,7 @@ const ContactBlock = () => {
   return (
     <div id="contact-block" className="bg-[#1E1E1E] text-white py-20">
       <div className="container mx-auto px-4 max-w-4xl">
-      <h2 className="text-[#F06002] text-7xl font-bold mb-4">
+      <h2 className="text-[#F06002] font-arial-black text-7xl font-bold mb-4">
               CONTACT
             </h2>
         <div className="flex flex-col md:flex-row items-start gap-8">
@@ -34,7 +34,7 @@ const ContactBlock = () => {
           
           <div className="md:w-fit">
           
-            <h3 className="text-white text-7xl font-bold">
+            <h3 className="text-white font-arial-black text-7xl font-bold">
               US
             </h3>
           </div>

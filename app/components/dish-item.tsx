@@ -32,7 +32,7 @@ const DishItem = ({ title, description, price, imageUrl, onOrder }: DishItemProp
       <div className="w-1/2 p-8 flex flex-col justify-between">
         {/* Title and Description */}
         <div>
-          <h3 className="text-[#F06002] text-4xl font-bold mb-4">
+          <h3 className="text-[#F06002] font-arial-black text-4xl font-bold mb-4">
             {title}
           </h3>
           <p className="text-white text-xl">

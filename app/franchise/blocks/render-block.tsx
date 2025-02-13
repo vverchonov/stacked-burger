@@ -7,7 +7,7 @@ const RenderBlock = () => {
     <div className="bg-white">
       {/* Title */}
       <div className="container mx-auto px-4 py-8 pt-16">
-        <div className="text-center mb-2">
+        <div className="text-center mb-2 font-arial-black">
           <h2 className="text-black text-7xl font-bold mb-2">
             BECOME A PART OF
           </h2>

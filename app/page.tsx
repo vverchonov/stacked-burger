@@ -14,8 +14,8 @@ export default function Home() {
 		<MenuBlock />
 		<DishesBlock/>
 		<WeAreBlock />
-		<InstagramBlock />
 		<RecipeBlock />
+		<InstagramBlock />
 		<LocationsBlock />
 		<ContactBlock />
 	</>

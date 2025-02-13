@@ -29,7 +29,7 @@ const WelcomeBlock = () => {
           {/* Hungry Button */}
           <Link href="/menu">
             <button 
-              className="bg-[#1E1E1E] text-white px-16 py-6 text-4xl rounded-full
+              className="bg-[#1E1E1E] font-baloo text-white px-16 py-6 text-4xl rounded-full
                          transform transition-transform hover:scale-105
                          border-2 border-[#FF6B35] hover:bg-[#FF6B35] font-bold"
               style={{

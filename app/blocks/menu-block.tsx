@@ -1,12 +1,187 @@
 'use client';
 
 import Image from 'next/image';
+import { useState, useEffect, useRef } from 'react';
+
+const products = [
+  {
+    id: 1,
+    title: 'SINGLE STACK',
+    description: 'Pickles, red onions, stacked sauce, 1 patty',
+    price: 9,
+    comboPrice: 14,
+    imageUrl: '/menu/burger-transparent.png'
+  },
+  {
+    id: 2,
+    title: 'DOUBLE STACK',
+    description: 'Pickles, red onions, stacked sauce, 2 patties',
+    price: 11,
+    comboPrice: 16,
+    imageUrl: '/menu/burger-transparent.png'
+  },
+  {
+    id: 3,
+    title: 'TRIPLE STACK',
+    description: 'Pickles, red onions, stacked sauce, 3 patties',
+    price: 13,
+    comboPrice: 18,
+    imageUrl: '/menu/burger-transparent.png'
+  },
+  {
+    id: 4,
+    title: 'BIG STACK',
+    description: 'Pickles, white onions, lettuce, cheddar, middle bun, stacked sauce, 4 patties',
+    price: 18,
+    comboPrice: 23,
+    imageUrl: '/menu/burger-transparent.png'
+  },
+  {
+    id: 5,
+    title: 'OKLAHOMA',
+    description: 'Grilled onion, bacon, pickles, cheddar, stacked sauce',
+    price: 14,
+    comboPrice: 19,
+    imageUrl: '/menu/burger-transparent.png'
+  },
+  {
+    id: 6,
+    title: 'EAST WEST',
+    description: 'Pickles, red onions, grilled halloumi, bacon, stacked sauce',
+    price: 14,
+    comboPrice: 19,
+    imageUrl: '/menu/burger-transparent.png'
+  },
+  {
+    id: 7,
+    title: 'CYPRUS',
+    description: 'Grilled halloumi, grilled red onions, honey garlic',
+    price: 13,
+    comboPrice: 18,
+    imageUrl: '/menu/burger-transparent.png'
+  },
+  {
+    id: 8,
+    title: 'CALIFORNIA',
+    description: 'Avocado, tomato, cheddar, bacon, lettuce, stacked sauce',
+    price: 19,
+    comboPrice: 19,
+    imageUrl: '/menu/burger-transparent.png'
+  },
+  {
+    id: 9,
+    title: 'CHEDDAR JALAPENO',
+    description: 'Jalapeno, cheddar, bacon, stacked sauce',
+    price: 14,
+    comboPrice: 19,
+    imageUrl: '/menu/burger-transparent.png'
+  },
+  {
+    id: 10,
+    title: 'CRUNCHY STACK',
+    description: 'Pickles, white onions, lettuce, cheddar, stacked sauce',
+    price: 14,
+    comboPrice: 19,
+    imageUrl: '/menu/burger-transparent.png'
+  },
+  {
+    id: 11,
+    title: 'BUFFALO',
+    description: 'Pickles, mayo',
+    price: 12,
+    comboPrice: 17,
+    imageUrl: '/menu/burger-transparent.png'
+  },
+  {
+    id: 12,
+    title: 'ORIGINAL CHICKEN',
+    description: 'Pickles, mayo',
+    price: 12,
+    comboPrice: 17,
+    imageUrl: '/menu/burger-transparent.png'
+  },
+  {
+    id: 13,
+    title: 'CALIFORNIA CHICKEN',
+    description: 'Bacon, avocado, lettuce, tomato, mayo',
+    price: 14,
+    comboPrice: 19,
+    imageUrl: '/menu/burger-transparent.png'
+  },
+  {
+    id: 14,
+    title: 'CHEDDAR JALAPENO CHICKEN',
+    description: 'Cheddar, jalapeno, mayo',
+    price: 13,
+    comboPrice: 18,
+    imageUrl: '/menu/burger-transparent.png'
+  }
+];
 
 const MenuBlock = () => {
+  const [currentProduct, setCurrentProduct] = useState(0);
+  const [autoPlay, setAutoPlay] = useState(true);
+  const [, setSlideDirection] = useState('next'); // 'next' or 'prev'
+  const autoPlayTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  // Clear the auto-play resume timeout
+  const clearAutoPlayTimeout = () => {
+    if (autoPlayTimeoutRef.current) {
+      clearTimeout(autoPlayTimeoutRef.current);
+      autoPlayTimeoutRef.current = null;
+    }
+  };
+
+  // Set up a new timeout to resume auto-play
+  const setupAutoPlayResume = () => {
+    clearAutoPlayTimeout();
+    autoPlayTimeoutRef.current = setTimeout(() => {
+      setAutoPlay(true);
+    }, 5000); // 5 seconds
+  };
+
+  useEffect(() => {
+    let intervalId: NodeJS.Timeout;
+    
+    if (autoPlay) {
+      intervalId = setInterval(() => {
+        setSlideDirection('next');
+        setCurrentProduct((prev) => (prev + 1) % products.length);
+      }, 5000);
+    }
+
+    return () => {
+      if (intervalId) {
+        clearInterval(intervalId);
+      }
+    };
+  }, [autoPlay]);
+
+  // Clean up the timeout when component unmounts
+  useEffect(() => {
+    return () => {
+      clearAutoPlayTimeout();
+    };
+  }, []);
+
+  const nextProduct = () => {
+    setAutoPlay(false);
+    setSlideDirection('next');
+    setCurrentProduct((prev) => (prev + 1) % products.length);
+    setupAutoPlayResume();
+  };
+
+  const prevProduct = () => {
+    setAutoPlay(false);
+    setSlideDirection('prev');
+    setCurrentProduct((prev) => (prev - 1 + products.length) % products.length);
+    setupAutoPlayResume();
+  };
+
   return (
-    <div id="menu-block" className="bg-[#1C1C1C] h-screen relative">
+    <div id="menu-block" className="bg-[#1C1C1C] min-h-screen flex flex-col items-center relative py-12">
       {/* Top Image */}
-      <div className="absolute top-12 left-0 w-full">
+      <div className="w-full">
         <Image
           src="/menu/texts.webp"
           alt="Menu texts"
@@ -18,32 +193,95 @@ const MenuBlock = () => {
       </div>
 
       {/* Menu Title */}
-      <div className="absolute top-[20%] left-1/2 -translate-x-1/2">
-        <h2 className="text-white text-7xl md:text-8xl font-bold">
+      <div className="w-full max-w-6xl mx-auto px-4 md:px-8">
+        <h2 className="text-white text-right mb-[-10px] md:mb-[-30px] font-arial-black text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-semibold">
           OUR MENU
         </h2>
       </div>
 
-      {/* Middle Section with Gradient */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90%] max-w-7xl h-[700px] rounded-[48px] overflow-hidden"
-        style={{
-          background: 'linear-gradient(112.65deg, #F06002 53.4%, #1C1C1C 53.41%)'
-        }}
-      >
-        {/* Order Now Button */}
-        <div className="absolute bottom-12 left-12">
-          <button 
-            className="bg-[#1E1E1E] text-white px-12 py-4 text-2xl rounded-full
-                     transform transition-transform hover:scale-105
-                     border-2 border-white hover:bg-white hover:text-[#F06002] font-bold"
-          >
-            ORDER NOW
-          </button>
-        </div>
-      </div>
+      {/* Navigation Arrows - Moved outside */}
+      <div className="relative w-full max-w-[1400px]">
+        <button 
+          onClick={prevProduct}
+          className="hidden lg:block absolute left-0 top-1/2 -translate-y-1/2 text-white z-10"
+        >
+          <div className="flex items-center text-8xl font-bold hover:text-[#F06002] transition-colors">
+            <span className="transform scale-y-150">«</span>
+          </div>
+        </button>
+        <button 
+          onClick={nextProduct}
+          className="hidden lg:block absolute right-0 top-1/2 -translate-y-1/2 text-white z-10"
+        >
+          <div className="flex items-center text-8xl font-bold hover:text-[#F06002] transition-colors">
+            <span className="transform scale-y-150">»</span>
+          </div>
+        </button>
 
-      <div className="container mx-auto px-4 relative">
-        {/* Content will go here */}
+        {/* Middle Section with Gradient */}
+        <div className="relative w-[95%] md:w-[90%] max-w-7xl h-auto md:h-[700px] rounded-[32px] md:rounded-[48px] overflow-hidden mx-auto">
+          <div
+            className="w-full h-full py-8 md:py-0"
+            style={{
+              background: 'linear-gradient(112.65deg, #F06002 53.4%, #1C1C1C 53.41%)'
+            }}
+          >
+            {/* Product Carousel */}
+            <div className="relative h-full w-full px-6 md:px-12 overflow-hidden">
+              {/* Product Content Container */}
+              <div className="flex flex-col lg:flex-row h-full">
+                {/* Left Side - Product Info */}
+                <div className="w-full lg:w-1/2 lg:order-1 flex flex-col px-4 lg:px-0">
+                  <div className="flex-1 flex flex-col lg:mt-24 h-full overflow-hidden">
+                    <div 
+                      key={currentProduct}
+                      className="animate-textFadeIn"
+                    >
+                      <h3 className="text-white text-4xl font-arial-black sm:text-5xl lg:text-6xl xl:text-7xl font-bold mb-4 lg:mb-6">
+                        {products[currentProduct].title}
+                      </h3>
+                      <p className="text-white lg:ps-16 text-lg lg:mt-16 sm:text-xl lg:text-2xl xl:text-3xl max-w-lg mb-4 lg:mb-8">
+                        {products[currentProduct].description}
+                      </p>
+                      <p className="text-white lg:ps-16 font-arial-black text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold mb-4">
+                        ${products[currentProduct].price}
+                        <span className="text-xl sm:text-2xl font-arial-black lg:text-3xl xl:text-4xl ml-2 lg:ml-4">
+                          (Combo ${products[currentProduct].comboPrice})
+                        </span>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Product Image */}
+                <div className="w-full lg:w-1/2 lg:order-2 flex items-center justify-center mb-8 lg:mb-0">
+                  <div 
+                    key={`img-${currentProduct}`}
+                    className="relative w-full max-w-[400px] lg:max-w-[500px] aspect-square rounded-[32px] lg:rounded-[48px] 
+                             border-2 lg:border-4 border-white p-4 lg:p-8 animate-textFadeIn"
+                  >
+                    <Image
+                      src={products[currentProduct].imageUrl}
+                      alt={products[currentProduct].title}
+                      fill
+                      className="object-contain"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Order Now Button */}
+            <div className="relative lg:absolute bottom-0 lg:bottom-6 left-0 lg:left-12 w-full lg:w-auto px-6 lg:px-0 pb-6 lg:pb-0 mt-8 lg:mt-0">
+              <button 
+                className="w-full lg:w-auto font-bold bg-white text-[#1E1E1E] px-8 lg:px-16 py-4 lg:py-6 text-2xl lg:text-3xl rounded-full
+                         border-2 border-white transition-transform duration-300 hover:scale-105"
+              >
+                ORDER NOW
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
