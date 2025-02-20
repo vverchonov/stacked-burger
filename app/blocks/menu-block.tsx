@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import { useState, useEffect, useRef } from 'react';
+import PreloadImages from '../components/preload-images';
 
 const products = [
   {
@@ -180,6 +181,7 @@ const MenuBlock = () => {
 
   return (
     <div id="menu-block" className="bg-[#1C1C1C] min-h-screen flex flex-col items-center relative py-12">
+      <PreloadImages />
       {/* Top Image */}
       <div className="w-full">
         <Image
@@ -264,6 +266,8 @@ const MenuBlock = () => {
                       src={products[currentProduct].imageUrl}
                       alt={products[currentProduct].title}
                       fill
+                      priority
+                      loading="eager"
                       className="object-contain"
                     />
                   </div>
