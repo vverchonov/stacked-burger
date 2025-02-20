@@ -18,7 +18,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Stack Burger",
-  description: "Stack Burger is a burger restaurant in the heart of the London, Ontario, Canada.",
+  description: "Hand Smashed Burgers & Crispy Deep Fried Chicken | Voted BEST BURGER 2024",
   icons: {
     icon: '/favicon.ico',
   },
@@ -31,6 +31,16 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+      <meta
+          property="image"
+          content="https://stacked-burger.vercel.app/header.png"
+        />
+        <meta
+          property="og:image"
+          content="https://stacked-burger.vercel.app/header.png"
+        />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col`}
       >
