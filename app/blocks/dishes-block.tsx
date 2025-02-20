@@ -59,6 +59,33 @@ const dishes = [
     description: '',
     price: '$4 S / $7 L',
        imageUrl: '/sides/Layer9.webp'
+  },
+  {
+    id: 9,
+    title: 'Chocolate milkshake',
+    description: '',
+    price: '$7',
+    imageUrl: '/sides/1.webp'
+  },{
+    id: 10,
+    title: 'Strawberry milkshake',
+    description: '',
+    price: '$7',
+    imageUrl: '/sides/strawberry.webp'
+  },
+  {
+    id:11,
+    title: 'Vanilla milkshake',
+    description: '',
+    price: '$7',
+    imageUrl: '/sides/vanilla.webp'
+  },
+  {
+    id: 12,
+    title: 'Chocolate Peanut Butter milkshake',
+    description: '',
+    price: '$7',
+    imageUrl: '/sides/Chocolate_peanut_butter.webp'
   }
 ];
 
