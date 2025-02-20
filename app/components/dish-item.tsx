@@ -7,7 +7,7 @@ interface DishItemProps {
   description: string;
   price: string;
   imageUrl: string;
-  onOrder?: () => void;
+  onOrder: () => void;
 }
 
 const DishItem = ({ title, price, imageUrl, onOrder }: DishItemProps) => {
@@ -41,7 +41,6 @@ const DishItem = ({ title, price, imageUrl, onOrder }: DishItemProps) => {
         </div>
         {/* Price and Button */}
         <div className="space-y-4">
-          
           <button
             onClick={onOrder}
             className="bg-white text-black px-8 py-3 rounded-full text-lg font-bold

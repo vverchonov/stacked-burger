@@ -3,6 +3,7 @@
 import Image from 'next/image';
 import { useState, useEffect, useRef } from 'react';
 import PreloadImages from '../components/preload-images';
+import Modal from '../components/modal';
 
 const products = [
   {
@@ -123,6 +124,7 @@ const MenuBlock = () => {
   const [currentProduct, setCurrentProduct] = useState(0);
   const [autoPlay, setAutoPlay] = useState(true);
   const [, setSlideDirection] = useState('next'); // 'next' or 'prev'
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const autoPlayTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   // Clear the auto-play resume timeout
@@ -278,6 +280,7 @@ const MenuBlock = () => {
             {/* Order Now Button */}
             <div className="relative lg:absolute bottom-0 lg:bottom-6 left-0 lg:left-12 w-full lg:w-auto px-6 lg:px-0 pb-6 lg:pb-0 mt-8 lg:mt-0">
               <button 
+                onClick={() => setIsModalOpen(true)}
                 className="w-full lg:w-auto font-bold bg-white text-[#1E1E1E] px-8 lg:px-16 py-4 lg:py-6 text-2xl lg:text-3xl rounded-full
                          border-2 border-white transition-transform duration-300 hover:scale-105"
               >
@@ -287,6 +290,11 @@ const MenuBlock = () => {
           </div>
         </div>
       </div>
+
+      <Modal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+      />
     </div>
   );
 };

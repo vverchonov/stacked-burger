@@ -1,0 +1,94 @@
+'use client';
+
+import { useEffect } from 'react';
+
+interface ModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+}
+
+const Modal = ({ isOpen, onClose }: ModalProps) => {
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        onClose();
+      }
+    };
+
+    if (isOpen) {
+      document.addEventListener('keydown', handleEscape);
+      document.body.style.overflow = 'hidden';
+    }
+
+    return () => {
+      document.removeEventListener('keydown', handleEscape);
+      document.body.style.overflow = 'unset';
+    };
+  }, [isOpen, onClose]);
+
+  if (!isOpen) return null;
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+      {/* Backdrop */}
+      <div 
+        className="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm"
+        onClick={onClose}
+      />
+
+      {/* Modal */}
+      <div className="relative bg-[#F06002] rounded-3xl w-full max-w-lg p-8 shadow-xl">
+        {/* Close Button */}
+        <button
+          onClick={onClose}
+          className="absolute top-4 right-4 text-white hover:text-black transition-colors"
+        >
+          <svg
+            className="w-6 h-6"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M6 18L18 6M6 6l12 12"
+            />
+          </svg>
+        </button>
+
+        {/* Content */}
+        <div className="mt-4">
+          <h2 className="text-3xl font-bold text-white mb-8 font-arial-black text-center">
+            CHOOSE LOCATION
+          </h2>
+
+          {/* Buttons */}
+          <div className="flex flex-col sm:flex-row gap-4">
+            <a
+              href="https://www.order.store/ca/store/stacked-burger-%26-chicken/XktmNg6fVmedzVpHywQWPA"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex-1 bg-white text-black text-center py-4 px-6 rounded-full 
+                       font-bold text-lg hover:bg-opacity-90 transition-all duration-300"
+            >
+              125 KING STREET
+            </a>
+            <a
+              href="https://www.order.store/store/stacked-burger-%26-chicken/JGxu7H6CVWyhJknf12R1EA"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex-1 bg-white uppercase text-black text-center py-4 px-6 rounded-full 
+                       font-bold text-lg hover:bg-opacity-90 transition-all duration-300"
+            >
+              Cherryhill Village Mall
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Modal; 
