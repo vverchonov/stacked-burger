@@ -21,13 +21,18 @@ const InterestedBlock = () => {
     form.append('isFranchise', 'true');
 
     try {
+      console.log('Sending franchise form...');
       const response = await fetch('/api/contact', {
         method: 'POST',
         body: form,
       });
 
       const data = await response.json();
-      console.log('data',data)
+      console.log('API Response:', {
+        status: response.status,
+        ok: response.ok,
+        data: data
+      });
       
       if (response.ok) {
         // Clear form
@@ -39,10 +44,10 @@ const InterestedBlock = () => {
         });
         alert('Franchise request sent successfully!');
       } else {
-        alert('Failed to send request. Please try again.');
+        alert(`Failed to send request: ${data.error || 'Unknown error'}`);
       }
     } catch (error) {
-      console.error('Error:', error);
+      console.error('Error sending franchise request:', error);
       alert('Failed to send request. Please try again.');
     }
   };

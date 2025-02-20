@@ -19,14 +19,18 @@ const ContactBlock = () => {
     form.append('isFranchise', 'false');
 
     try {
+      console.log('Sending contact form...');
       const response = await fetch('/api/contact', {
         method: 'POST',
         body: form,
       });
 
       const data = await response.json();
-
-      console.log('data:',data)
+      console.log('API Response:', {
+        status: response.status,
+        ok: response.ok,
+        data: data
+      });
       
       if (response.ok) {
         // Clear form
@@ -37,10 +41,10 @@ const ContactBlock = () => {
         });
         alert('Message sent successfully!');
       } else {
-        alert('Failed to send message. Please try again.');
+        alert(`Failed to send message: ${data.error || 'Unknown error'}`);
       }
     } catch (error) {
-      console.error('Error:', error);
+      console.error('Error sending message:', error);
       alert('Failed to send message. Please try again.');
     }
   };

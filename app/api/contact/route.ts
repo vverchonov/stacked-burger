@@ -2,9 +2,20 @@ import { NextResponse } from "next/server";
 import nodemailer from "nodemailer";
 
 export async function POST(request: Request) {
+  // Debug environment variables (safely)
+  console.log('Environment Variables Status:', {
+    EMAIL_TO: !!process.env.EMAIL_TO,
+    EMAIL_FROM: !!process.env.EMAIL_FROM,
+    EMAIL_PASSWORD: !!process.env.EMAIL_PASSWORD,
+  });
+
   // Check if environment variables are set
   if (!process.env.EMAIL_TO || !process.env.EMAIL_FROM || !process.env.EMAIL_PASSWORD) {
-    console.error('Missing environment variables');
+    console.error('Missing environment variables:', {
+      EMAIL_TO: !!process.env.EMAIL_TO,
+      EMAIL_FROM: !!process.env.EMAIL_FROM,
+      EMAIL_PASSWORD: !!process.env.EMAIL_PASSWORD,
+    });
     return NextResponse.json(
       { error: "Server configuration error" },
       { status: 500 }
