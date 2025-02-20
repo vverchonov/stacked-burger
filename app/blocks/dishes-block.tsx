@@ -103,17 +103,26 @@ const DishesBlock = () => {
           SIDES, DRINKS, BITES, DESSERTS ...
         </h2>
 
-        <Marquee className='flex w-full' autoFill direction='right' speed={100} pauseOnHover>
-          <div className='ms-12 flex flex-row gap-12 py-12 bg-[#FFFFFF0A] w-full'>
-            {dishes.map((dish) => (
-              <DishItem 
-                key={dish.id} 
-                {...dish} 
-                onOrder={() => setIsModalOpen(true)} 
-              />
-            ))}
-          </div>
-        </Marquee>
+        <div className="overflow-x-auto touch-pan-x">
+          <Marquee 
+            className='flex w-full' 
+            autoFill 
+            direction='right' 
+            speed={50}
+            pauseOnHover
+            gradient={false}
+          >
+            <div className='ms-12 flex flex-row gap-12 py-12 bg-[#FFFFFF0A] w-full'>
+              {dishes.map((dish) => (
+                <DishItem 
+                  key={dish.id} 
+                  {...dish} 
+                  onOrder={() => setIsModalOpen(true)} 
+                />
+              ))}
+            </div>
+          </Marquee>
+        </div>
 
         <Modal
           isOpen={isModalOpen}
