@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { toast } from 'react-toastify';
 
 const InterestedBlock = () => {
   const [formData, setFormData] = useState({
@@ -42,13 +43,13 @@ const InterestedBlock = () => {
           phone: '',
           message: ''
         });
-        alert('Franchise request sent successfully!');
+        toast.success('Franchise request sent successfully!');
       } else {
-        alert(`Failed to send request: ${data.error || 'Unknown error'}`);
+        toast.error(`Failed to send request: ${data.error || 'Unknown error'}`);
       }
     } catch (error) {
       console.error('Error sending franchise request:', error);
-      alert('Failed to send request. Please try again.');
+      toast.error('Failed to send request. Please try again.');
     }
   };
 

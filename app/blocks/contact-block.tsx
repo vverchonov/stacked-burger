@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { toast } from 'react-toastify';
 
 const ContactBlock = () => {
   const [formData, setFormData] = useState({
@@ -39,13 +40,13 @@ const ContactBlock = () => {
           email: '',
           message: ''
         });
-        alert('Message sent successfully!');
+        toast.success('Message sent successfully!');
       } else {
-        alert(`Failed to send message: ${data.error || 'Unknown error'}`);
+        toast.error(`Failed to send message: ${data.error || 'Unknown error'}`);
       }
     } catch (error) {
       console.error('Error sending message:', error);
-      alert('Failed to send message. Please try again.');
+      toast.error('Failed to send message. Please try again.');
     }
   };
 
