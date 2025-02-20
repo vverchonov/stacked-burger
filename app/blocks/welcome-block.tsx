@@ -4,16 +4,38 @@ import Link from 'next/link';
 import Image from 'next/image';
 
 const WelcomeBlock = () => {
+  const scrollToMenu = (e: React.MouseEvent) => {
+    e.preventDefault();
+    const menuBlock = document.getElementById('menu-block');
+    if (menuBlock) {
+      menuBlock.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
-    <div className="relative h-[calc(100vh-5rem)] mt-[5rem] w-full overflow-hidden shadow-2xl">
+    <div className="relative h-auto sm:h-[calc(100vh-5rem)] mt-[5rem] w-full overflow-hidden shadow-2xl">
       {/* Background Image */}
       <Image
         src="/welcome/background.webp"
         alt="Stacked Burger Background"
-        fill
+        width={1080}
+        height={1920}
         priority
-        className="object-cover object-center"
+        className="w-full h-auto sm:hidden"
+        quality={100}
       />
+      
+      <div className="hidden sm:block relative h-full w-full">
+        <Image
+          src="/welcome/background.webp"
+          alt="Stacked Burger Background"
+          fill
+          priority
+          className="object-cover object-center"
+          sizes="100vw"
+          quality={100}
+        />
+      </div>
 
       {/* Gradient Overlay */}
       <div 
@@ -27,7 +49,7 @@ const WelcomeBlock = () => {
       <div className="absolute inset-0 flex flex-col items-center justify-end pb-24">
         <div className="text-center">
           {/* Hungry Button */}
-          <Link href="/menu">
+          <a href="#menu-block" onClick={scrollToMenu}>
             <button 
               className="bg-[#1E1E1E] font-baloo text-white px-16 py-6 text-4xl rounded-full
                          transform transition-transform hover:scale-105
@@ -38,7 +60,7 @@ const WelcomeBlock = () => {
             >
               HUNGRY?
             </button>
-          </Link>
+          </a>
         </div>
       </div>
     </div>
