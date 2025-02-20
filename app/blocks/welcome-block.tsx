@@ -45,7 +45,7 @@ const WelcomeBlock = () => {
       />
 
       {/* Content Overlay */}
-      <div className="absolute inset-0 flex flex-col items-center justify-end pb-24">
+      <div className="absolute hidden sm:flex inset-0 flex-col items-center justify-end pb-24">
         <div className="text-center">
           {/* Hungry Button */}
           <a href="#menu-block" onClick={scrollToMenu}>

@@ -126,6 +126,34 @@ const MenuBlock = () => {
   const [, setSlideDirection] = useState('next'); // 'next' or 'prev'
   const [isModalOpen, setIsModalOpen] = useState(false);
   const autoPlayTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const touchStartX = useRef<number>(0);
+  const touchEndX = useRef<number>(0);
+
+  // Handle touch start
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+  };
+
+  // Handle touch move
+  const handleTouchMove = (e: React.TouchEvent) => {
+    touchEndX.current = e.touches[0].clientX;
+  };
+
+  // Handle touch end
+  const handleTouchEnd = () => {
+    const swipeThreshold = 50; // minimum distance for a swipe
+    const swipeDistance = touchEndX.current - touchStartX.current;
+
+    if (Math.abs(swipeDistance) > swipeThreshold) {
+      if (swipeDistance > 0) {
+        // Swipe right - show previous
+        prevProduct();
+      } else {
+        // Swipe left - show next
+        nextProduct();
+      }
+    }
+  };
 
   // Clear the auto-play resume timeout
   const clearAutoPlayTimeout = () => {
@@ -229,6 +257,9 @@ const MenuBlock = () => {
             style={{
               background: 'linear-gradient(112.65deg, #F06002 53.4%, #1C1C1C 53.41%)'
             }}
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
+            onTouchEnd={handleTouchEnd}
           >
             {/* Product Carousel */}
             <div className="relative h-full w-full px-6 md:px-12 overflow-hidden">
@@ -258,7 +289,7 @@ const MenuBlock = () => {
                 </div>
 
                 {/* Product Image */}
-                <div className="w-full lg:w-7/12 lg:order-2 flex items-center justify-center mb-8 lg:mb-0">
+                <div className="w-full lg:w-7/12 lg:order-2 flex items-center justify-center mb-0 lg:mb-0">
                   <div 
                     key={`img-${currentProduct}`}
                     className="relative w-full aspect-square rounded-[32px] lg:rounded-[48px] 
