@@ -9,10 +9,40 @@ const ContactBlock = () => {
     message: ''
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission here
-    console.log(formData);
+    
+    const form = new FormData();
+    form.append('name', formData.name);
+    form.append('email', formData.email);
+    form.append('message', formData.message);
+    form.append('isFranchise', 'false');
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        body: form,
+      });
+
+      const data = await response.json();
+
+      console.log('data:',data)
+      
+      if (response.ok) {
+        // Clear form
+        setFormData({
+          name: '',
+          email: '',
+          message: ''
+        });
+        alert('Message sent successfully!');
+      } else {
+        alert('Failed to send message. Please try again.');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      alert('Failed to send message. Please try again.');
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -26,14 +56,12 @@ const ContactBlock = () => {
   return (
     <div id="contact-block" className="bg-[#1E1E1E] text-white py-20">
       <div className="container mx-auto px-4 max-w-4xl">
-      <h2 className="text-[#F06002] font-arial-black text-7xl font-bold mb-4">
-              CONTACT
-            </h2>
+        <h2 className="text-[#F06002] font-arial-black text-7xl font-bold mb-4">
+          CONTACT
+        </h2>
         <div className="flex flex-col md:flex-row items-start gap-8">
           {/* Title Section */}
-          
           <div className="md:w-fit">
-          
             <h3 className="text-white font-arial-black text-7xl font-bold">
               US
             </h3>
@@ -50,7 +78,6 @@ const ContactBlock = () => {
                 placeholder="NAME"
                 className="w-full bg-transparent border border-white/30 rounded-full px-6 py-4 
                          focus:outline-none focus:border-[#F06002] transition-colors"
-                required
               />
             </div>
             
@@ -76,7 +103,6 @@ const ContactBlock = () => {
                 rows={6}
                 className="w-full bg-transparent border border-white/30 rounded-3xl px-6 py-4 
                          focus:outline-none focus:border-[#F06002] transition-colors resize-none"
-                required
               />
             </div>
 

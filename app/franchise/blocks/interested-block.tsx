@@ -10,10 +10,41 @@ const InterestedBlock = () => {
     message: ''
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission
-    console.log(formData);
+    
+    const form = new FormData();
+    form.append('name', formData.name);
+    form.append('email', formData.email);
+    form.append('phone', formData.phone);
+    form.append('message', formData.message);
+    form.append('isFranchise', 'true');
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        body: form,
+      });
+
+      const data = await response.json();
+      console.log('data',data)
+      
+      if (response.ok) {
+        // Clear form
+        setFormData({
+          name: '',
+          email: '',
+          phone: '',
+          message: ''
+        });
+        alert('Franchise request sent successfully!');
+      } else {
+        alert('Failed to send request. Please try again.');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      alert('Failed to send request. Please try again.');
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -52,6 +83,7 @@ const InterestedBlock = () => {
               placeholder="EMAIL"
               value={formData.email}
               onChange={handleChange}
+              required
               className="w-full bg-transparent border border-white/20 rounded-full px-8 py-5 
                      text-white placeholder-white/60 focus:outline-none focus:border-[#F06002]
                      transition-colors text-xl"
