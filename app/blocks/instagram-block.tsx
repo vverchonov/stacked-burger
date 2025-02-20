@@ -3,6 +3,8 @@
 import Image from 'next/image';
 
 const InstagramBlock = () => {
+  const instagramUrl = "https://www.instagram.com/stacked_burger?igsh=NXJuaHQwMGE2c2Nu";
+
   return (
     <div className="bg-[#1C1C1C] py-12">
       <div className="container mx-auto px-4">
@@ -10,19 +12,26 @@ const InstagramBlock = () => {
           {/* Left Side - Square Image */}
           <div className="w-full md:w-2/3">
             <div className="max-w-[600px] mx-auto">
-              <div className="aspect-square relative bg-[#1C1C1C] rounded-[48px] border-[13px] border-[#F06002] p-4"
-                style={{
-                  boxShadow: '0px 0px 36.9px 0px #00000066'
-                }}
+              <a 
+                href={instagramUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block relative"
               >
-                <Image
-                  src="/instagram/ig.png"
-                  alt="Instagram Feed"
-                  fill
-                  className="object-cover rounded-[32px]"
-                  priority
-                />
-              </div>
+                <div className="aspect-square relative bg-[#1C1C1C] rounded-[48px] border-[13px] border-[#F06002] p-4 transition-transform duration-300 hover:scale-[1.02]"
+                  style={{
+                    boxShadow: '0px 0px 36.9px 0px #00000066'
+                  }}
+                >
+                  <Image
+                    src="/instagram/ig.png"
+                    alt="Instagram Feed"
+                    fill
+                    className="object-cover rounded-[32px]"
+                    priority
+                  />
+                </div>
+              </a>
             </div>
           </div>
 
@@ -43,14 +52,21 @@ const InstagramBlock = () => {
             
             {/* QR Code */}
             <div className="w-full max-w-[200px] mx-auto md:mx-0">
-              <Image
-                src="/instagram/qr_code.webp"
-                alt="Instagram QR Code"
-                width={200}
-                height={200}
-                className="w-full h-auto"
-                priority
-              />
+              <a 
+                href={instagramUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block transition-transform duration-300 hover:scale-105"
+              >
+                <Image
+                  src="/instagram/qr_code.webp"
+                  alt="Instagram QR Code"
+                  width={200}
+                  height={200}
+                  className="w-full h-auto"
+                  priority
+                />
+              </a>
             </div>
           </div>
         </div>

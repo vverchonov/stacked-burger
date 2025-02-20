@@ -29,39 +29,35 @@ const RecipeBlock = () => {
                 TRADITIONS
               </h2>
               <p className="text-white text-xl leading-relaxed">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                tempor incididunt Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                sed do eiusmod tempor incididunt Lorem ipsum dolor sit amet,
-                consectetur adipiscing elit, sed do eiusmod tempor incididunt Lorem
-                ipsum dolor sit amet, consectetur
+              Our culinary philosophy blends time-honoured traditions with innovative recipes. We take pride in using fresh, locally sourced ingredients to create dishes that honour classic flavours while introducing unique twists. From our signature stacked sauce to our carefully crafted burger combinations, every element is designed to delight your taste buds.
               </p>
             </div>
           </div>
           
           {/* Image Section - 1/3 */}
-          <div className="w-full md:w-1/3 bg-white flex md:rounded-l-full items-end justify-center p-12">
+          {/* <div className="w-full md:w-1/3 bg-white flex md:rounded-l-full items-end justify-center p-12"> */}
             <Image
               src="/recipe/stick_1.webp"
               alt="Chef illustration"
               width={300}
               height={300}
-              className="w-auto h-auto"
+              className="w-auto h-auto object-contain md:w-1/3"
             />
-          </div>
+          {/* </div> */}
         </div>
 
         {/* Second Row */}
-        <div className="flex flex-col md:flex-row">
+        <div className="flex flex-col-reverse md:flex-row">
           {/* Image Section - 1/3 */}
-          <div className="w-full md:w-1/3 bg-white md:rounded-r-full flex items-end justify-center p-12 order-2 md:order-1">
+          {/* <div className="w-full md:w-1/3 bg-white md:rounded-r-full flex items-end justify-center p-12 order-2 md:order-1"> */}
             <Image
               src="/recipe/stick_2.webp"
               alt="Chef cooking illustration"
               width={300}
               height={300}
-              className="w-auto h-auto"
+              className="w-auto h-auto object-contain md:w-1/3"
             />
-          </div>
+          {/* </div> */}
 
           {/* Text Section - 2/3 */}
           <div className="w-full md:w-2/3 p-4 py-12 md:p-24 order-1 md:order-2">
@@ -72,10 +68,7 @@ const RecipeBlock = () => {
                 SAUCE
               </h2>
               <p className="text-white text-xl leading-relaxed">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt Lorem ipsum dolor sit amet,
-                consectetur adipiscing elit, sed do eiusmod tempor incididunt
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              Our secret stacked sauce is the cornerstone of our flavour profile. A harmonious blend of savoury and tangy notes, it perfectly complements our burgers and chicken sandwiches, adding an extra layer of deliciousness that keeps our customers coming back for more.
               </p>
             </div>
           </div>

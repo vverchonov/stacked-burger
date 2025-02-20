@@ -23,21 +23,39 @@ const ShopBlock = () => {
 
           {/* Right Side - Text */}
           <div className="md:w-1/2">
-            <p className="text-white text-2xl leading-relaxed">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed 
-              do eiusmod tempor incididunt Lorem ipsum dolor sit amet, 
-              consectetur adipiscing elit, sed do eiusmod tempor incididunt 
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed 
-              do eiusmod tempor incididunt Lorem ipsum dolor sit amet, 
-              consectetur adipiscing elit, sed do eiusmod tempor 
-              incididunLorem ipsum dolor sit amet, consectetur adipiscing 
-              elit, sed do eiusmod tempor incididunt Lorem ipsum dolor sit 
-              amet, consectetur adipiscing elit, sed do eiusmod tempor 
-              incididunLorem ipsum dolor sit amet, consectetur adipiscing 
-              elit, sed do eiusmod tempor incididunt Lorem ipsum dolor sit 
-              amet, consectetur adipiscing elit, sed do eiusmod tempor 
-              incididun
+            {/* Main Title */}
+            <h2 className="text-white font-arial-black text-4xl md:text-5xl font-bold mb-6">
+              Own a Stacked Burger & Chicken Franchise!
+            </h2>
+
+            {/* Subtitle */}
+            <p className="text-white text-2xl mb-12">
+              Bring Stacked Burger & Chicken to your community and be part of our growing success.
             </p>
+
+            {/* Why Choose Us Section */}
+            <div className="mb-12">
+              <h3 className="text-white font-arial-black text-3xl font-bold mb-4">
+                Why Choose Us?
+              </h3>
+              <ul className="text-white text-xl space-y-2">
+                <li>• Proven brand with a loyal customer base</li>
+                <li>• Full training provided, no restaurant experience needed</li>
+                <li>• Ongoing support from setup to daily operations</li>
+              </ul>
+            </div>
+
+            {/* Who We're Looking For Section */}
+            <div>
+              <h3 className="text-white font-arial-black text-3xl font-bold mb-4">
+                Who We are Looking For:
+              </h3>
+              <ul className="text-white text-xl space-y-2">
+                <li>• Entrepreneurs ready to own and operate their business</li>
+                <li>• Strong leaders who thrive in a fast-paced environment</li>
+                <li>• Individuals passionate about great food and customer service</li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>

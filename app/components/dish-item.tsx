@@ -5,12 +5,12 @@ import Image from 'next/image';
 interface DishItemProps {
   title: string;
   description: string;
-  price: number;
+  price: string;
   imageUrl: string;
   onOrder?: () => void;
 }
 
-const DishItem = ({ title, description, price, imageUrl, onOrder }: DishItemProps) => {
+const DishItem = ({ title, price, imageUrl, onOrder }: DishItemProps) => {
   return (
     <div 
       className="flex bg-[#1E1E1E] rounded-[32px] overflow-hidden w-[600px]"
@@ -35,16 +35,13 @@ const DishItem = ({ title, description, price, imageUrl, onOrder }: DishItemProp
           <h3 className="text-[#F06002] font-arial-black text-4xl font-bold mb-4">
             {title}
           </h3>
-          <p className="text-white text-xl">
-            {description}
+          <p className="text-white text-2xl font-bold">
+            {price}
           </p>
         </div>
-
         {/* Price and Button */}
         <div className="space-y-4">
-          <p className="text-white text-2xl font-bold">
-            ${price.toFixed(2)}
-          </p>
+          
           <button
             onClick={onOrder}
             className="bg-white text-black px-8 py-3 rounded-full text-lg font-bold

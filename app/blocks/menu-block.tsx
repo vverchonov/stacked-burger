@@ -10,7 +10,7 @@ const products = [
     description: 'Pickles, red onions, stacked sauce, 1 patty',
     price: 9,
     comboPrice: 14,
-    imageUrl: '/menu/burger-transparent.png'
+    imageUrl: '/menu/burgers/single_stack.webp'
   },
   {
     id: 2,
@@ -18,7 +18,7 @@ const products = [
     description: 'Pickles, red onions, stacked sauce, 2 patties',
     price: 11,
     comboPrice: 16,
-    imageUrl: '/menu/burger-transparent.png'
+    imageUrl: '/menu/burgers/double_stacked.webp'
   },
   {
     id: 3,
@@ -26,7 +26,7 @@ const products = [
     description: 'Pickles, red onions, stacked sauce, 3 patties',
     price: 13,
     comboPrice: 18,
-    imageUrl: '/menu/burger-transparent.png'
+    imageUrl: '/menu/burgers/triple_st.webp'
   },
   {
     id: 4,
@@ -34,7 +34,7 @@ const products = [
     description: 'Pickles, white onions, lettuce, cheddar, middle bun, stacked sauce, 4 patties',
     price: 18,
     comboPrice: 23,
-    imageUrl: '/menu/burger-transparent.png'
+    imageUrl: '/menu/burgers/big_stack.webp'
   },
   {
     id: 5,
@@ -42,7 +42,7 @@ const products = [
     description: 'Grilled onion, bacon, pickles, cheddar, stacked sauce',
     price: 14,
     comboPrice: 19,
-    imageUrl: '/menu/burger-transparent.png'
+    imageUrl: '/menu/burgers/oklahoma_burger.webp'
   },
   {
     id: 6,
@@ -50,7 +50,7 @@ const products = [
     description: 'Pickles, red onions, grilled halloumi, bacon, stacked sauce',
     price: 14,
     comboPrice: 19,
-    imageUrl: '/menu/burger-transparent.png'
+    imageUrl: '/menu/burgers/east_west.webp'
   },
   {
     id: 7,
@@ -58,7 +58,7 @@ const products = [
     description: 'Grilled halloumi, grilled red onions, honey garlic',
     price: 13,
     comboPrice: 18,
-    imageUrl: '/menu/burger-transparent.png'
+    imageUrl: '/menu/burgers/cyprus_burger.webp'
   },
   {
     id: 8,
@@ -66,7 +66,7 @@ const products = [
     description: 'Avocado, tomato, cheddar, bacon, lettuce, stacked sauce',
     price: 19,
     comboPrice: 19,
-    imageUrl: '/menu/burger-transparent.png'
+    imageUrl: '/menu/burgers/california_chicken.webp'
   },
   {
     id: 9,
@@ -74,7 +74,7 @@ const products = [
     description: 'Jalapeno, cheddar, bacon, stacked sauce',
     price: 14,
     comboPrice: 19,
-    imageUrl: '/menu/burger-transparent.png'
+    imageUrl: '/menu/burgers/chedar_halapeno.webp'
   },
   {
     id: 10,
@@ -82,7 +82,7 @@ const products = [
     description: 'Pickles, white onions, lettuce, cheddar, stacked sauce',
     price: 14,
     comboPrice: 19,
-    imageUrl: '/menu/burger-transparent.png'
+    imageUrl: '/menu/burgers/crispy_stacked.webp' /// ??? 
   },
   {
     id: 11,
@@ -90,7 +90,7 @@ const products = [
     description: 'Pickles, mayo',
     price: 12,
     comboPrice: 17,
-    imageUrl: '/menu/burger-transparent.png'
+    imageUrl: '/menu/burgers/buffalo_chicken.webp'
   },
   {
     id: 12,
@@ -98,7 +98,7 @@ const products = [
     description: 'Pickles, mayo',
     price: 12,
     comboPrice: 17,
-    imageUrl: '/menu/burger-transparent.png'
+    imageUrl: '/menu/burgers/original_chicken.webp'
   },
   {
     id: 13,
@@ -106,7 +106,7 @@ const products = [
     description: 'Bacon, avocado, lettuce, tomato, mayo',
     price: 14,
     comboPrice: 19,
-    imageUrl: '/menu/burger-transparent.png'
+    imageUrl: '/menu/burgers/california_chicken.webp'
   },
   {
     id: 14,
@@ -114,7 +114,7 @@ const products = [
     description: 'Cheddar, jalapeno, mayo',
     price: 13,
     comboPrice: 18,
-    imageUrl: '/menu/burger-transparent.png'
+    imageUrl: '/menu/burgers/chedar_halapeno.webp'
   }
 ];
 
@@ -231,7 +231,7 @@ const MenuBlock = () => {
               {/* Product Content Container */}
               <div className="flex flex-col lg:flex-row h-full">
                 {/* Left Side - Product Info */}
-                <div className="w-full lg:w-1/2 lg:order-1 flex flex-col px-4 lg:px-0">
+                <div className="w-full lg:w-5/12 lg:order-1 flex flex-col px-4 lg:px-0">
                   <div className="flex-1 flex flex-col lg:mt-24 h-full overflow-hidden">
                     <div 
                       key={currentProduct}
@@ -254,11 +254,11 @@ const MenuBlock = () => {
                 </div>
 
                 {/* Product Image */}
-                <div className="w-full lg:w-1/2 lg:order-2 flex items-center justify-center mb-8 lg:mb-0">
+                <div className="w-full lg:w-7/12 lg:order-2 flex items-center justify-center mb-8 lg:mb-0">
                   <div 
                     key={`img-${currentProduct}`}
-                    className="relative w-full max-w-[400px] lg:max-w-[500px] aspect-square rounded-[32px] lg:rounded-[48px] 
-                             border-2 lg:border-4 border-white p-4 lg:p-8 animate-textFadeIn"
+                    className="relative w-full aspect-square rounded-[32px] lg:rounded-[48px] 
+                              animate-textFadeIn"
                   >
                     <Image
                       src={products[currentProduct].imageUrl}
