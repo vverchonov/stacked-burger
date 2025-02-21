@@ -17,7 +17,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Stack Burger",
+  title: "Stacked Burger",
   description: "Hand Smashed Burgers & Crispy Deep Fried Chicken | Voted BEST BURGER 2024",
   icons: {
     icon: '/favicon.ico',
