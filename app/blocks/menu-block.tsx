@@ -278,7 +278,7 @@ const MenuBlock = () => {
                       <p className="text-white lg:ps-16 text-lg lg:mt-16 sm:text-xl lg:text-2xl xl:text-3xl max-w-lg mb-4 lg:mb-8">
                         {products[currentProduct].description}
                       </p>
-                      <p className="text-white lg:ps-16 font-arial-black text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold mb-4">
+                      <p className="text-white lg:ps-16 font-arial-black text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold">
                         ${products[currentProduct].price}
                         <span className="text-xl sm:text-2xl font-arial-black lg:text-3xl xl:text-4xl ml-2 lg:ml-4">
                           (Combo ${products[currentProduct].comboPrice})
@@ -290,19 +290,39 @@ const MenuBlock = () => {
 
                 {/* Product Image */}
                 <div className="w-full lg:w-7/12 lg:order-2 flex items-center justify-center mb-0 lg:mb-0">
-                  <div 
-                    key={`img-${currentProduct}`}
-                    className="relative w-full aspect-square rounded-[32px] lg:rounded-[48px] 
-                              animate-textFadeIn"
-                  >
-                    <Image
-                      src={products[currentProduct].imageUrl}
-                      alt={products[currentProduct].title}
-                      fill
-                      priority
-                      loading="eager"
-                      className="object-contain"
-                    />
+                  <div className="relative w-full">
+                    {/* Mobile Navigation Arrows */}
+                    <button 
+                      onClick={prevProduct}
+                      className="lg:hidden absolute left-[-10px] top-1/2 -translate-y-1/2 text-white z-10 p-2 bg-black/20 rounded-full hover:bg-black/40"
+                    >
+                      <div className="flex items-center text-5xl font-bold hover:text-[#F06002] transition-colors">
+                        <span className="transform scale-y-150">«</span>
+                      </div>
+                    </button>
+                    <button 
+                      onClick={nextProduct}
+                      className="lg:hidden absolute right-[-10px] top-1/2 -translate-y-1/2 text-white z-10 p-2 bg-black/20 rounded-full hover:bg-black/40"
+                    >
+                      <div className="flex items-center text-5xl font-bold hover:text-[#F06002] transition-colors">
+                        <span className="transform scale-y-150">»</span>
+                      </div>
+                    </button>
+
+                    <div 
+                      key={`img-${currentProduct}`}
+                      className="relative w-full aspect-square rounded-[32px] lg:rounded-[48px] 
+                                animate-textFadeIn"
+                    >
+                      <Image
+                        src={products[currentProduct].imageUrl}
+                        alt={products[currentProduct].title}
+                        fill
+                        priority
+                        loading="eager"
+                        className="object-contain"
+                      />
+                    </div>
                   </div>
                 </div>
               </div>
