@@ -24,7 +24,7 @@ const RecipeBlock = () => {
           <div className="w-full md:w-2/3 p-4 py-12 md:p-24">
             <div className="max-w-3xl">
               <h2 className="text-white font-arial-black text-3xl md:text-6xl font-bold mb-8">
-                RECIPY
+                RECIPE
                 <span className="text-black font-arial-black">&</span>
                 TRADITIONS
               </h2>
