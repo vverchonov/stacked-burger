@@ -10,7 +10,7 @@ const VideoBlock = () => {
         playsInline
         className="w-full sm:absolute sm:top-0 sm:left-0 sm:h-full sm:object-cover object-contain"
       >
-        <source src="/franchise/video.mp4" type="video/mp4" />
+        <source src="/franchise/video.MP4" type="video/mp4" />
       </video>
 
       {/* Gradient Overlay */}
