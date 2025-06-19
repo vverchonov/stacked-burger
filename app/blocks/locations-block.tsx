@@ -7,9 +7,9 @@ const locations = [
     title: 'KING ST.',
     address: '125 KING st. LONDON, ON.',
     addressUrl: 'https://maps.google.com/?q=125+King+St,+London,+ON+N6A+1C3',
-    hours: '10am-10pm',
-    phone: '226 645 6466',
-    phoneUrl: 'tel:+12266456466',
+    hours: 'Sunday - Thursday: 11am-10pm, Friday - Saturday: 10am-11pm',
+    phone: '519 679 9009',
+    phoneUrl: 'tel:+15196799009',
     description: 'Were located right on King, across the street from Covent Garden Market',
     mapUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2918.6707589309474!2d-81.2497807!3d43.0006637!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x882ef21b01c07ef5%3A0x28c7d7699a056b99!2s125%20King%20St%2C%20London%2C%20ON%20N6A%201C3!5e0!3m2!1sen!2sca!4v1708532183010!5m2!1sen!2sca'
   },
@@ -17,9 +17,9 @@ const locations = [
     title: 'CHERRYHILL MALL',
     address: '301 Oxford St W, London, ON N6H 1S6',
     addressUrl: 'https://maps.google.com/?q=Stacked+Burger+Cherryhill,+301+Oxford+St+W,+London,+ON+N6H+1S6',
-    hours: '10am-10pm',
-    phone: '226 645 6466',
-    phoneUrl: 'tel:+12266456466',
+    hours: 'Monday - Friday: 10am-9pm, Saturday: 10am-7pm, Sunday: 12pm-6pm',
+    phone: '519 667 0202',
+    phoneUrl: 'tel:+15196670202',
     description: 'We are located right inside the Cherry Hill mall',
     mapUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2918.4320692921933!2d-81.275161!3d42.9902358!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x882ef1890fd1d6b7%3A0xb24ec1f8b8dbc57!2sStacked%20Burger%20Cherryhill!5e0!3m2!1sen!2sca!4v1740089332554!5m2!1sen!2sca'
   }

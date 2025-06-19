@@ -278,12 +278,12 @@ const MenuBlock = () => {
                       <p className="text-white lg:ps-16 text-lg lg:mt-16 sm:text-xl lg:text-2xl xl:text-3xl max-w-lg mb-4 lg:mb-8">
                         {products[currentProduct].description}
                       </p>
-                      <p className="text-white lg:ps-16 font-arial-black text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold">
+                      {/* <p className="text-white lg:ps-16 font-arial-black text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold">
                         ${products[currentProduct].price}
                         <span className="text-xl sm:text-2xl font-arial-black lg:text-3xl xl:text-4xl ml-2 lg:ml-4">
                           (Combo ${products[currentProduct].comboPrice})
                         </span>
-                      </p>
+                      </p> */}
                     </div>
                   </div>
                 </div>

@@ -10,7 +10,7 @@ interface DishItemProps {
   onOrder: () => void;
 }
 
-const DishItem = ({ title, price, imageUrl, onOrder }: DishItemProps) => {
+const DishItem = ({ title, imageUrl, onOrder }: DishItemProps) => {
   return (
     <div 
       className="flex bg-[#1E1E1E] rounded-[16px] sm:rounded-[32px] overflow-hidden w-full h-[150px] sm:h-[300px]"
@@ -35,9 +35,9 @@ const DishItem = ({ title, price, imageUrl, onOrder }: DishItemProps) => {
           <h3 className="text-[#F06002] font-arial-black text-lg sm:text-4xl font-bold mb-2 sm:mb-4 line-clamp-2">
             {title}
           </h3>
-          <p className="text-white text-base sm:text-2xl font-bold">
+          {/* <p className="text-white text-base sm:text-2xl font-bold">
             {price}
-          </p>
+          </p> */}
         </div>
         {/* Price and Button */}
         <div>
