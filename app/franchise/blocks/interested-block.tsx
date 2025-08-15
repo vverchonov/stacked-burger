@@ -5,20 +5,61 @@ import { toast } from 'react-toastify';
 
 const InterestedBlock = () => {
   const [formData, setFormData] = useState({
-    name: '',
+    firstName: '',
+    lastName: '',
     email: '',
     phone: '',
-    message: ''
+    isCanadianResident: '',
+    province: '',
+    city: '',
+    investmentCapital: ''
   });
+
+  const canadianProvinces = [
+    { name: 'Alberta', code: 'AB' },
+    { name: 'British Columbia', code: 'BC' },
+    { name: 'Manitoba', code: 'MB' },
+    { name: 'New Brunswick', code: 'NB' },
+    { name: 'Newfoundland and Labrador', code: 'NL' },
+    { name: 'Nova Scotia', code: 'NS' },
+    { name: 'Ontario', code: 'ON' },
+    { name: 'Prince Edward Island', code: 'PE' },
+    { name: 'Quebec', code: 'QC' },
+    { name: 'Saskatchewan', code: 'SK' },
+    { name: 'Northwest Territories', code: 'NT' },
+    { name: 'Nunavut', code: 'NU' },
+    { name: 'Yukon', code: 'YT' }
+  ];
+
+  const investmentOptions = [
+    '$500,000+',
+    '$250,000 - $500,000',
+    '$150,000 - $250,000',
+    'Below $150,000',
+    'I only want a brochure at this stage'
+  ];
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
+    // Check if all required fields are filled
+    const requiredFields = ['firstName', 'lastName', 'email', 'phone', 'isCanadianResident', 'province', 'city', 'investmentCapital'];
+    const missingFields = requiredFields.filter(field => !formData[field as keyof typeof formData]);
+
+    if (missingFields.length > 0) {
+      toast.error('Please fill in all required fields');
+      return;
+    }
+
     const form = new FormData();
-    form.append('name', formData.name);
+    form.append('firstName', formData.firstName);
+    form.append('lastName', formData.lastName);
     form.append('email', formData.email);
     form.append('phone', formData.phone);
-    form.append('message', formData.message);
+    form.append('isCanadianResident', formData.isCanadianResident);
+    form.append('province', formData.province);
+    form.append('city', formData.city);
+    form.append('investmentCapital', formData.investmentCapital);
     form.append('isFranchise', 'true');
 
     try {
@@ -34,14 +75,18 @@ const InterestedBlock = () => {
         ok: response.ok,
         data: data
       });
-      
+
       if (response.ok) {
         // Clear form
         setFormData({
-          name: '',
+          firstName: '',
+          lastName: '',
           email: '',
           phone: '',
-          message: ''
+          isCanadianResident: '',
+          province: '',
+          city: '',
+          investmentCapital: ''
         });
         toast.success('Franchise request sent successfully!');
       } else {
@@ -53,7 +98,7 @@ const InterestedBlock = () => {
     }
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({
       ...prev,
@@ -72,21 +117,37 @@ const InterestedBlock = () => {
 
           {/* Form */}
           <form onSubmit={handleSubmit} className="space-y-6">
-            <input
-              type="text"
-              name="name"
-              placeholder="NAME"
-              value={formData.name}
-              onChange={handleChange}
-              className="w-full bg-transparent border border-white/20 rounded-full px-8 py-5 
-                     text-white placeholder-white/60 focus:outline-none focus:border-[#F06002]
-                     transition-colors text-xl"
-            />
-            
+            {/* First Name and Last Name in a row */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <input
+                type="text"
+                name="firstName"
+                placeholder="FIRST NAME *"
+                value={formData.firstName}
+                onChange={handleChange}
+                required
+                className="w-full bg-transparent border border-white/20 rounded-full px-8 py-5 
+                       text-white placeholder-white/60 focus:outline-none focus:border-[#F06002]
+                       transition-colors text-xl"
+              />
+
+              <input
+                type="text"
+                name="lastName"
+                placeholder="LAST NAME *"
+                value={formData.lastName}
+                onChange={handleChange}
+                required
+                className="w-full bg-transparent border border-white/20 rounded-full px-8 py-5 
+                       text-white placeholder-white/60 focus:outline-none focus:border-[#F06002]
+                       transition-colors text-xl"
+              />
+            </div>
+
             <input
               type="email"
               name="email"
-              placeholder="EMAIL"
+              placeholder="EMAIL *"
               value={formData.email}
               onChange={handleChange}
               required
@@ -94,28 +155,82 @@ const InterestedBlock = () => {
                      text-white placeholder-white/60 focus:outline-none focus:border-[#F06002]
                      transition-colors text-xl"
             />
-            
+
             <input
               type="tel"
               name="phone"
-              placeholder="PHONE"
+              placeholder="PHONE *"
               value={formData.phone}
               onChange={handleChange}
+              required
               className="w-full bg-transparent border border-white/20 rounded-full px-8 py-5 
                      text-white placeholder-white/60 focus:outline-none focus:border-[#F06002]
                      transition-colors text-xl"
             />
-            
-            <textarea
-              name="message"
-              placeholder="MESSAGE"
-              value={formData.message}
+
+            {/* Canadian Residency */}
+            <select
+              name="isCanadianResident"
+              value={formData.isCanadianResident}
               onChange={handleChange}
-              rows={6}
-              className="w-full bg-transparent border border-white/20 rounded-3xl px-8 py-5 
+              required
+              className="w-full bg-transparent border border-white/20 rounded-full px-8 py-5 pr-20
+                     text-white focus:outline-none focus:border-[#F06002]
+                     transition-colors text-xl"
+            >
+              <option value="" disabled className="bg-[#1E1E1E] text-white/60">Are you a Canadian permanent resident or citizen? *</option>
+              <option value="yes" className="bg-[#1E1E1E] text-white">Yes</option>
+              <option value="no" className="bg-[#1E1E1E] text-white">No</option>
+            </select>
+
+            {/* Province Selection */}
+            <select
+              name="province"
+              value={formData.province}
+              onChange={handleChange}
+              required
+              className="w-full bg-transparent border border-white/20 rounded-full px-8 py-5 pr-20
+                     text-white focus:outline-none focus:border-[#F06002]
+                     transition-colors text-xl"
+            >
+              <option value="" disabled className="bg-[#1E1E1E] text-white/60">Province of Interest *</option>
+              {canadianProvinces.map((province) => (
+                <option key={province.code} value={province.code} className="bg-[#1E1E1E] text-white">
+                  {province.name} ({province.code})
+                </option>
+              ))}
+            </select>
+
+            {/* City Input */}
+            <input
+              type="text"
+              name="city"
+              placeholder="CITY OF INTEREST *"
+              value={formData.city}
+              onChange={handleChange}
+              required
+              className="w-full bg-transparent border border-white/20 rounded-full px-8 py-5 
                      text-white placeholder-white/60 focus:outline-none focus:border-[#F06002]
-                     transition-colors resize-none text-xl"
+                     transition-colors text-xl"
             />
+
+            {/* Investment Capital */}
+            <select
+              name="investmentCapital"
+              value={formData.investmentCapital}
+              onChange={handleChange}
+              required
+              className="w-full bg-transparent border border-white/20 rounded-full px-8 py-5 pr-20
+                     text-white focus:outline-none focus:border-[#F06002]
+                     transition-colors text-xl"
+            >
+              <option value="" disabled className="bg-[#1E1E1E] text-white/60">What is your available investment capital? *</option>
+              {investmentOptions.map((option, index) => (
+                <option key={index} value={option} className="bg-[#1E1E1E] text-white">
+                  {option}
+                </option>
+              ))}
+            </select>
 
             <button
               type="submit"
