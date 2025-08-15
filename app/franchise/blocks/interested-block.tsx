@@ -174,7 +174,7 @@ const InterestedBlock = () => {
               value={formData.isCanadianResident}
               onChange={handleChange}
               required
-              className="w-full bg-transparent border border-white/20 rounded-full px-8 py-5 pr-20
+              className="w-full bg-transparent border border-white/20 rounded-full px-8 py-6 pr-24
                      text-white focus:outline-none focus:border-[#F06002]
                      transition-colors text-xl"
             >
@@ -189,7 +189,7 @@ const InterestedBlock = () => {
               value={formData.province}
               onChange={handleChange}
               required
-              className="w-full bg-transparent border border-white/20 rounded-full px-8 py-5 pr-20
+              className="w-full bg-transparent border border-white/20 rounded-full px-8 py-6 pr-24
                      text-white focus:outline-none focus:border-[#F06002]
                      transition-colors text-xl"
             >
@@ -220,7 +220,7 @@ const InterestedBlock = () => {
               value={formData.investmentCapital}
               onChange={handleChange}
               required
-              className="w-full bg-transparent border border-white/20 rounded-full px-8 py-5 pr-20
+              className="w-full bg-transparent border border-white/20 rounded-full px-8 py-6 pr-24
                      text-white focus:outline-none focus:border-[#F06002]
                      transition-colors text-xl"
             >
