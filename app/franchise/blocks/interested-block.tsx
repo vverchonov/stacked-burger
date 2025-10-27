@@ -10,26 +10,10 @@ const InterestedBlock = () => {
     email: '',
     phone: '',
     isCanadianResident: '',
-    province: '',
+    country: '',
     city: '',
     investmentCapital: ''
   });
-
-  const canadianProvinces = [
-    { name: 'Alberta', code: 'AB' },
-    { name: 'British Columbia', code: 'BC' },
-    { name: 'Manitoba', code: 'MB' },
-    { name: 'New Brunswick', code: 'NB' },
-    { name: 'Newfoundland and Labrador', code: 'NL' },
-    { name: 'Nova Scotia', code: 'NS' },
-    { name: 'Ontario', code: 'ON' },
-    { name: 'Prince Edward Island', code: 'PE' },
-    { name: 'Quebec', code: 'QC' },
-    { name: 'Saskatchewan', code: 'SK' },
-    { name: 'Northwest Territories', code: 'NT' },
-    { name: 'Nunavut', code: 'NU' },
-    { name: 'Yukon', code: 'YT' }
-  ];
 
   const investmentOptions = [
     '$500,000+',
@@ -43,7 +27,7 @@ const InterestedBlock = () => {
     e.preventDefault();
 
     // Check if all required fields are filled
-    const requiredFields = ['firstName', 'lastName', 'email', 'phone', 'isCanadianResident', 'province', 'city', 'investmentCapital'];
+    const requiredFields = ['firstName', 'lastName', 'email', 'phone', 'isCanadianResident', 'country', 'city', 'investmentCapital'];
     const missingFields = requiredFields.filter(field => !formData[field as keyof typeof formData]);
 
     if (missingFields.length > 0) {
@@ -57,7 +41,7 @@ const InterestedBlock = () => {
     form.append('email', formData.email);
     form.append('phone', formData.phone);
     form.append('isCanadianResident', formData.isCanadianResident);
-    form.append('province', formData.province);
+    form.append('country', formData.country);
     form.append('city', formData.city);
     form.append('investmentCapital', formData.investmentCapital);
     form.append('isFranchise', 'true');
@@ -84,7 +68,7 @@ const InterestedBlock = () => {
           email: '',
           phone: '',
           isCanadianResident: '',
-          province: '',
+          country: '',
           city: '',
           investmentCapital: ''
         });
@@ -183,23 +167,18 @@ const InterestedBlock = () => {
               <option value="no" className="bg-[#1E1E1E] text-white">No</option>
             </select>
 
-            {/* Province Selection */}
-            <select
-              name="province"
-              value={formData.province}
+            {/* Country Input */}
+            <input
+              type="text"
+              name="country"
+              placeholder="COUNTRY OF INTEREST *"
+              value={formData.country}
               onChange={handleChange}
               required
-              className="w-full bg-transparent border border-white/20 rounded-full px-8 py-6 pr-24
-                     text-white focus:outline-none focus:border-[#F06002]
+              className="w-full bg-transparent border border-white/20 rounded-full px-8 py-5 
+                     text-white placeholder-white/60 focus:outline-none focus:border-[#F06002]
                      transition-colors text-xl"
-            >
-              <option value="" disabled className="bg-[#1E1E1E] text-white/60">Province of Interest *</option>
-              {canadianProvinces.map((province) => (
-                <option key={province.code} value={province.code} className="bg-[#1E1E1E] text-white">
-                  {province.name} ({province.code})
-                </option>
-              ))}
-            </select>
+            />
 
             {/* City Input */}
             <input

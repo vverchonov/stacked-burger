@@ -3,19 +3,19 @@ import nodemailer from "nodemailer";
 
 export async function POST(request: Request) {
   // Debug environment variables (safely)
-  console.log('Environment Variables Status:', {
-    EMAIL_TO: !!process.env.REACT_APP_EMAIL_TO,
-    EMAIL_FROM: !!process.env.REACT_APP_EMAIL_FROM,
-    EMAIL_PASSWORD: !!process.env.REACT_APP_EMAIL_PASSWORD,
-  });
+  // console.log('Environment Variables Status:', {
+  //   EMAIL_TO: !!process.env.REACT_APP_EMAIL_TO,
+  //   EMAIL_FROM: !!process.env.REACT_APP_EMAIL_FROM,
+  //   EMAIL_PASSWORD: !!process.env.REACT_APP_EMAIL_PASSWORD,
+  // });
 
   // Check if environment variables are set
   if (!process.env.REACT_APP_EMAIL_TO || !process.env.REACT_APP_EMAIL_FROM || !process.env.REACT_APP_EMAIL_PASSWORD) {
-    console.error('Missing environment variables:', {
-      EMAIL_TO: !!process.env.REACT_APP_EMAIL_TO,
-      EMAIL_FROM: !!process.env.REACT_APP_EMAIL_FROM,
-      EMAIL_PASSWORD: !!process.env.REACT_APP_EMAIL_PASSWORD,
-    });
+    // console.error('Missing environment variables:', {
+    //   EMAIL_TO: !!process.env.REACT_APP_EMAIL_TO,
+    //   EMAIL_FROM: !!process.env.REACT_APP_EMAIL_FROM,
+    //   EMAIL_PASSWORD: !!process.env.REACT_APP_EMAIL_PASSWORD,
+    // });
     return NextResponse.json(
       { error: "Server configuration error" },
       { status: 500 }
@@ -40,6 +40,27 @@ export async function POST(request: Request) {
         { error: "Email is required" },
         { status: 400 }
       );
+    }
+
+    // Get franchise-specific fields if it's a franchise request
+    let franchiseFields = '';
+    if (isFranchise) {
+      const firstName = formData.get("firstName");
+      const lastName = formData.get("lastName");
+      const isCanadianResident = formData.get("isCanadianResident");
+      const country = formData.get("country");
+      const city = formData.get("city");
+      const investmentCapital = formData.get("investmentCapital");
+      
+      franchiseFields = `
+        <h3>Franchise Details:</h3>
+        <p><strong>First Name:</strong> ${firstName || 'Not provided'}</p>
+        <p><strong>Last Name:</strong> ${lastName || 'Not provided'}</p>
+        <p><strong>Canadian Resident/Citizen:</strong> ${isCanadianResident || 'Not provided'}</p>
+        <p><strong>Country of Interest:</strong> ${country || 'Not provided'}</p>
+        <p><strong>City of Interest:</strong> ${city || 'Not provided'}</p>
+        <p><strong>Investment Capital:</strong> ${investmentCapital || 'Not provided'}</p>
+      `;
     }
 
     const transporter = nodemailer.createTransport({
@@ -73,12 +94,11 @@ export async function POST(request: Request) {
         : `Contact Form Submission - Stacked Burger`,
       html: `
         <h2>${isFranchise ? 'New Franchise Request' : 'New Contact Form Submission'}</h2>
-        <p><strong>Name:</strong> ${name || 'Not provided'}</p>
+        ${!isFranchise ? `<p><strong>Name:</strong> ${name || 'Not provided'}</p>` : ''}
         <p><strong>Email:</strong> ${email}</p>
         ${phone ? `<p><strong>Phone:</strong> ${phone}</p>` : ''}
-        <p><strong>Message:</strong></p>
-        <p>${message || 'Not provided'}</p>
-        ${isFranchise ? '<p><em>This is a franchise inquiry submitted through the franchise form.</em></p>' : ''}
+        ${!isFranchise && message ? `<p><strong>Message:</strong></p><p>${message}</p>` : ''}
+        ${franchiseFields}
       `,
     };
 
