@@ -329,11 +329,14 @@ const MenuBlock = () => {
             </div>
 
             {/* Order Now Button */}
+            {/* Order Now Button - stop touch propagation so carousel swipe doesn't steal taps on mobile */}
             <div className="relative lg:absolute bottom-0 lg:bottom-6 left-0 lg:left-12 w-full lg:w-auto px-6 lg:px-0 pb-6 lg:pb-0 mt-8 lg:mt-0">
               <button 
                 onClick={() => setIsModalOpen(true)}
+                onTouchStart={(e) => e.stopPropagation()}
+                onTouchEnd={(e) => e.stopPropagation()}
                 className="w-full lg:w-auto font-bold bg-white text-[#1E1E1E] px-8 lg:px-16 py-4 lg:py-6 text-2xl lg:text-3xl rounded-full
-                         border-2 border-white transition-transform duration-300 hover:scale-105"
+                         border-2 border-white transition-transform duration-300 hover:scale-105 touch-manipulation"
               >
                 ORDER NOW
               </button>
