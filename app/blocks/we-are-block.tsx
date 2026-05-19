@@ -20,7 +20,7 @@ const WeAreBlock = () => {
             {/* Stick Figure Illustration */}
             <div className="flex mt-16 w-full justify-center items-center">
               <Image
-                src="/we-are/guys.png"
+                src="/we-are/guys.webp"
                 alt="Team illustration"
                 width={300}
                 height={150}
@@ -33,7 +33,7 @@ const WeAreBlock = () => {
           <div className="md:w-6/12 mt-12 md:mt-0 relative md:-right-20 lg:-right-32">
             <div className="relative w-full aspect-square overflow-hidden rounded-l-full">
               <Image
-                src="/we-are/team.png"
+                src="/we-are/team.webp"
                 alt="Our team"
                 fill
                 className="object-cover"

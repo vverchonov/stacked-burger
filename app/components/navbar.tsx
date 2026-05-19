@@ -49,7 +49,7 @@ const Navbar = () => {
             <Link href="/">
               <div className="flex items-center">
                 <Image
-                  src="/logo.png"
+                  src="/logo.webp"
                   alt="Stacked Burger logo"
                   width={48}
                   height={48}

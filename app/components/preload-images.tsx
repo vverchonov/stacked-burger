@@ -1,36 +1,36 @@
 import Head from 'next/head';
 
-const burgerImages = [
-  '/menu/burgers/single_stack.webp',
-  '/menu/burgers/double_stacked.webp',
-  '/menu/burgers/triple_st.webp',
-  '/menu/burgers/big_stack.webp',
-  '/menu/burgers/oklahoma_burger.webp',
-  '/menu/burgers/east_west.webp',
-  '/menu/burgers/cyprus_burger.webp',
-  '/menu/burgers/california_chicken.webp',
-  '/menu/burgers/chedar_halapeno.webp',
-  '/menu/burgers/crispy_stacked.webp',
-  '/menu/burgers/buffalo_chicken.webp',
-  '/menu/burgers/original_chicken.webp',
-  '/menu/burgers/california_chicken.webp',
-  '/menu/burgers/chedar_halapeno.webp'
+const burgerImages: { href: string; type: string }[] = [
+  { href: '/menu/burgers/single_stack.webp', type: 'image/webp' },
+  { href: '/menu/burgers/double_stacked.webp', type: 'image/webp' },
+  { href: '/menu/burgers/triple_st.webp', type: 'image/webp' },
+  { href: '/menu/burgers/quad_stack.webp', type: 'image/webp' },
+  { href: '/menu/burgers/oklahoma_burger.webp', type: 'image/webp' },
+  { href: '/menu/burgers/east_west.webp', type: 'image/webp' },
+  { href: '/menu/burgers/cyprus_burger.webp', type: 'image/webp' },
+  { href: '/menu/burgers/california_chicken.webp', type: 'image/webp' },
+  { href: '/menu/burgers/bacon_jalapeno.webp', type: 'image/webp' },
+  { href: '/menu/burgers/buffalo_chicken.webp', type: 'image/webp' },
+  { href: '/menu/burgers/original_chicken.webp', type: 'image/webp' },
+  { href: '/menu/burgers/korean_bbq_chicken.webp', type: 'image/webp' },
+  { href: '/menu/burgers/chedar_halapeno.webp', type: 'image/webp' },
+  { href: '/sides/jumbo_tendies.webp', type: 'image/webp' }
 ];
 
 const PreloadImages = () => {
   return (
     <Head>
-      {burgerImages.map((src, index) => (
+      {burgerImages.map((item, index) => (
         <link
           key={index}
           rel="preload"
           as="image"
-          href={src}
-          type="image/webp"
+          href={item.href}
+          type={item.type}
         />
       ))}
     </Head>
   );
 };
 
-export default PreloadImages; 
+export default PreloadImages;

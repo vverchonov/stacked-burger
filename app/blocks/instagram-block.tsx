@@ -24,7 +24,7 @@ const InstagramBlock = () => {
                   }}
                 >
                   <Image
-                    src="/instagram/ig.png"
+                    src="/instagram/ig.webp"
                     alt="Instagram Feed"
                     fill
                     className="object-cover rounded-[32px]"

@@ -14,76 +14,90 @@ const sides = [
   },
   {
     id: 2,
+    title: 'Classic Poutine',
+    description: '',
+    price: '$8 S / $12 L',
+    imageUrl: '/sides/classic_poutine.webp'
+  },
+  {
+    id: 3,
     title: 'Halloumi Poutine',
     description: '',
     price: '$8 S / $12 L',
     imageUrl: '/sides/Layer3.webp'
   },
   {
-    id: 3,
+    id: 4,
     title: 'Grilled Halloumi Cheese',
     description: '',
     price: '$8',
     imageUrl: '/sides/Layer4.webp'
   },
   {
-    id: 4,
+    id: 5,
     title: 'Jalapeno Poppers',
     description: '',
     price: '$7',
     imageUrl: '/sides/Layer5.webp'
   },
   {
-    id: 5,
+    id: 6,
     title: 'Mozzza Sticks',
     description: '',
     price: '$7',
     imageUrl: '/sides/Layer6.webp'
   },
   {
-    id: 6,
+    id: 7,
     title: 'Crinkle Cut Fries',
     description: '',
     price: '$5 S / $8 L',
     imageUrl: '/sides/Layer8.webp'
   },
   {
-    id: 7,
+    id: 8,
     title: 'Onion Rings',
     description: '',
     price: '$5 S / $8 L',
     imageUrl: '/sides/Layer7.webp'
   },
   {
-    id: 8,
+    id: 9,
     title: 'Fries',
     description: '',
     price: '$4 S / $7 L',
     imageUrl: '/sides/Layer9.webp'
   },
   {
-    id: 9,
+    id: 10,
+    title: 'Coleslaw',
+    description: '',
+    price: '$5',
+    imageUrl: '/sides/coleslaw.webp'
+  },
+  {
+    id: 11,
     title: 'Chocolate milkshake',
     description: '',
     price: '$7',
     imageUrl: '/sides/1.webp'
   },
   {
-    id: 10,
+    id: 12,
     title: 'Strawberry milkshake',
     description: '',
     price: '$7',
     imageUrl: '/sides/strawberry.webp'
   },
   {
-    id: 11,
+    id: 13,
     title: 'Vanilla milkshake',
     description: '',
     price: '$7',
     imageUrl: '/sides/vanilla.webp'
   },
   {
-    id: 12,
+    id: 14,
     title: 'Chocolate Peanut Butter milkshake',
     description: '',
     price: '$7',
@@ -127,4 +141,4 @@ const SidesBlock = () => {
   );
 };
 
-export default SidesBlock; 
+export default SidesBlock;

@@ -32,11 +32,11 @@ const products = [
   },
   {
     id: 4,
-    title: 'BIG STACK',
-    description: 'Pickles, white onions, lettuce, cheddar, middle bun, stacked sauce, 4 patties',
+    title: 'QUAD STACK',
+    description: 'Pickles, red onions, stacked sauce, 4 patties',
     price: 18,
     comboPrice: 23,
-    imageUrl: '/menu/burgers/big_stack.webp'
+    imageUrl: '/menu/burgers/quad_stack.webp'
   },
   {
     id: 5,
@@ -72,19 +72,11 @@ const products = [
   },
   {
     id: 9,
-    title: 'CHEDDAR JALAPENO',
-    description: 'Jalapeno, cheddar, bacon, stacked sauce',
+    title: 'BACON JALAPENO',
+    description: 'Jalapeno, bacon, cheddar, stacked sauce',
     price: 14,
     comboPrice: 19,
-    imageUrl: '/menu/burgers/chedar_halapeno.webp'
-  },
-  {
-    id: 10,
-    title: 'CRUNCHY STACK',
-    description: 'Pickles, white onions, lettuce, cheddar, stacked sauce',
-    price: 14,
-    comboPrice: 19,
-    imageUrl: '/menu/burgers/crispy_stacked.webp' /// ??? 
+    imageUrl: '/menu/burgers/bacon_jalapeno.webp'
   },
   {
     id: 11,
@@ -104,11 +96,11 @@ const products = [
   },
   {
     id: 13,
-    title: 'CALIFORNIA CHICKEN',
-    description: 'Bacon, avocado, lettuce, tomato, mayo',
+    title: 'KOREAN BBQ CHICKEN',
+    description: 'Pickles, coleslaw, Korean BBQ glaze, crispy chicken',
     price: 14,
     comboPrice: 19,
-    imageUrl: '/menu/burgers/california_chicken.webp'
+    imageUrl: '/menu/burgers/korean_bbq_chicken.webp'
   },
   {
     id: 14,
@@ -117,6 +109,14 @@ const products = [
     price: 13,
     comboPrice: 18,
     imageUrl: '/menu/burgers/chedar_halapeno.webp'
+  },
+  {
+    id: 15,
+    title: 'JUMBO TENDIES',
+    description: 'Crispy chicken tenders',
+    price: 9,
+    comboPrice: 9,
+    imageUrl: '/sides/jumbo_tendies.webp'
   }
 ];
 
@@ -320,7 +320,7 @@ const MenuBlock = () => {
                         fill
                         priority
                         loading="eager"
-                        className="object-contain"
+                        className="object-contain bg-transparent"
                       />
                     </div>
                   </div>
