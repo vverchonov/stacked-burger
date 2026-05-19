@@ -62,14 +62,14 @@ const products = [
     comboPrice: 18,
     imageUrl: '/menu/burgers/cyprus_burger.webp'
   },
-  {
-    id: 8,
-    title: 'CALIFORNIA',
-    description: 'Avocado, tomato, cheddar, bacon, lettuce, stacked sauce',
-    price: 19,
-    comboPrice: 19,
-    imageUrl: '/menu/burgers/california_chicken.webp'
-  },
+  // {
+  //   id: 8,
+  //   title: 'CALIFORNIA',
+  //   description: 'Avocado, tomato, cheddar, bacon, lettuce, stacked sauce',
+  //   price: 19,
+  //   comboPrice: 19,
+  //   imageUrl: '/menu/burgers/california_chicken.webp'
+  // },
   {
     id: 9,
     title: 'BACON JALAPENO',
@@ -102,14 +102,14 @@ const products = [
     comboPrice: 19,
     imageUrl: '/menu/burgers/korean_bbq_chicken.webp'
   },
-  {
-    id: 14,
-    title: 'CHEDDAR JALAPENO CHICKEN',
-    description: 'Cheddar, jalapeno, mayo',
-    price: 13,
-    comboPrice: 18,
-    imageUrl: '/menu/burgers/chedar_halapeno.webp'
-  },
+  // {
+  //   id: 14,
+  //   title: 'CHEDDAR JALAPENO CHICKEN',
+  //   description: 'Cheddar, jalapeno, mayo',
+  //   price: 13,
+  //   comboPrice: 18,
+  //   imageUrl: '/menu/burgers/chedar_halapeno.webp'
+  // },
   {
     id: 15,
     title: 'JUMBO TENDIES',
