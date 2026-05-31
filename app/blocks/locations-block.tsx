@@ -18,6 +18,7 @@ const locations = [
     address: '301 Oxford St W, London, ON N6H 1S6',
     addressUrl: 'https://maps.google.com/?q=Stacked+Burger+Cherryhill,+301+Oxford+St+W,+London,+ON+N6H+1S6',
     hours: 'Monday - Friday: 10am-9pm\nSaturday: 10am-7pm\nSunday: 12pm-6pm',
+    deliveryHours: 'Monday - Wednesday: 9pm-10pm\nThursday - Friday: 9pm-11pm\nSaturday: 7pm-11pm\nSunday: 6pm-10pm',
     phone: '519 667 0202',
     phoneUrl: 'tel:+15196670202',
     description: 'We are located right inside the Cherry Hill mall',
@@ -119,7 +120,16 @@ const LocationsBlock = () => {
               >
                 {locations[1].address}
               </a>
-              <p className="text-[#F06002] text-2xl whitespace-pre-line">{locations[1].hours}</p>
+              <div className="text-[#F06002] text-2xl whitespace-pre-line">
+                <p className="font-bold">Walk-In</p>
+                <p>{locations[1].hours}</p>
+                {'deliveryHours' in locations[1] && (
+                  <>
+                    <p className="font-bold mt-4">Delivery</p>
+                    <p>{locations[1].deliveryHours}</p>
+                  </>
+                )}
+              </div>
               <a 
                 href={locations[1].phoneUrl}
                 className="text-[#F06002] text-2xl font-bold hover:underline transition-all cursor-pointer"
