@@ -13,12 +13,12 @@ const DELIVERY_URL =
 const PICKUP_LOCATIONS = [
   {
     label: '125 KING STREET (Downtown)',
-    href: 'https://www.order.store/ca/store/stacked-burger-%26-chicken/XktmNg6fVmedzVpHywQWPA',
+    href: 'https://order.toasttab.com/online/stacked-burger-and-chicken-125-king-st?diningOption=takeout&rwg_token=AFd1xnGovGh-m9XCF1HbrtYHvoT2a8XgzG9LCPe2vNj0SzlOaYNDUNENCTQfMFQQjv3Ssp3nGLPvLbW-5BVZNshYNi8qAhbAAg%3D%3D',
     available: true,
   },
   {
     label: 'CHERRYHILL MALL (North)',
-    href: 'https://www.order.store/store/stacked-burger-%26-chicken/JGxu7H6CVWyhJknf12R1EA',
+    href: 'https://order.toasttab.com/online/stacked-burger-22-301-oxford-street-west?diningOption=takeout&rwg_token=AFd1xnFFp24mfk4GfVFWnn7QIBa8vyWCwH2OHkSc7407oPWw9riP_tpkVAuNZiXzCFJ6ie4LlckApwCcrA6MRGetpvppsgpieg%3D%3D',
     available: true,
   },
   {
@@ -27,11 +27,6 @@ const PICKUP_LOCATIONS = [
     available: false,
   },
 ] as const;
-
-function pickupHref(base: string) {
-  const sep = base.includes('?') ? '&' : '?';
-  return `${base}${sep}diningMode=PICKUP`;
-}
 
 const buttonClass =
   'w-full bg-white text-black text-center py-3 sm:py-4 px-4 sm:px-6 rounded-full font-bold text-base sm:text-lg hover:bg-opacity-90 transition-all duration-300';
@@ -148,7 +143,7 @@ const Modal = ({ isOpen, onClose }: ModalProps) => {
                   location.available ? (
                     <a
                       key={location.label}
-                      href={pickupHref(location.href)}
+                      href={location.href}
                       target="_blank"
                       rel="noopener noreferrer"
                       className={buttonClass}
