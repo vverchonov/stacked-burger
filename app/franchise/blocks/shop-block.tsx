@@ -8,13 +8,13 @@ const ShopBlock = () => {
       <div className="container mx-auto px-4">
         <div className="flex flex-col md:flex-row items-center gap-16">
           {/* Left Side - Image */}
-          <div className="hidden sm:block md:w-1/2">
-            <div className="relative w-full">
+          <div className="md:w-1/2">
+            <div className="relative w-full overflow-hidden rounded-2xl">
               <Image
-                src="/franchise/shop.webp"
-                alt="Shop Illustration"
-                width={600}
-                height={600}
+                src="/franchise/stack.JPG.webp"
+                alt="Stacked Burger & Chicken restaurant interior with digital menu boards and service counter"
+                width={1616}
+                height={1080}
                 className="w-full h-auto"
                 priority
               />
@@ -56,6 +56,16 @@ const ShopBlock = () => {
                 <li>• Individuals passionate about great food and customer service</li>
               </ul>
             </div>
+
+            {/* Brochure Button */}
+            <a
+              href="/franchise/brochure.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block mt-12 bg-white text-[#F06002] font-arial-black text-xl font-bold px-8 py-4 rounded-full transition-transform hover:scale-105"
+            >
+              Download Brochure
+            </a>
           </div>
         </div>
       </div>

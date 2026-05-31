@@ -7,7 +7,7 @@ const locations = [
     title: 'KING ST.',
     address: '125 KING st. LONDON, ON.',
     addressUrl: 'https://maps.google.com/?q=125+King+St,+London,+ON+N6A+1C3',
-    hours: 'Sunday - Thursday: 11am-10pm, Friday - Saturday: 10am-11pm',
+    hours: 'Sunday - Thursday: 11am-10pm\nFriday - Saturday: 10am-11pm',
     phone: '519 679 9009',
     phoneUrl: 'tel:+15196799009',
     description: 'Were located right on King, across the street from Covent Garden Market',
@@ -17,11 +17,18 @@ const locations = [
     title: 'CHERRYHILL MALL',
     address: '301 Oxford St W, London, ON N6H 1S6',
     addressUrl: 'https://maps.google.com/?q=Stacked+Burger+Cherryhill,+301+Oxford+St+W,+London,+ON+N6H+1S6',
-    hours: 'Monday - Friday: 10am-9pm, Saturday: 10am-7pm, Sunday: 12pm-6pm',
+    hours: 'Monday - Friday: 10am-9pm\nSaturday: 10am-7pm\nSunday: 12pm-6pm',
     phone: '519 667 0202',
     phoneUrl: 'tel:+15196670202',
     description: 'We are located right inside the Cherry Hill mall',
     mapUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2918.4320692921933!2d-81.275161!3d42.9902358!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x882ef1890fd1d6b7%3A0xb24ec1f8b8dbc57!2sStacked%20Burger%20Cherryhill!5e0!3m2!1sen!2sca!4v1740089332554!5m2!1sen!2sca'
+  },
+  {
+    title: 'COMING SOON',
+    subtitle: '775 Southdale Rd E (South)',
+    address: '775 Southdale Rd E, London, ON N6E 2C6',
+    addressUrl: 'https://maps.google.com/?q=775+Southdale+Rd+E,+London,+ON+N6E+2C6',
+    mapUrl: 'https://maps.google.com/maps?q=775+Southdale+Rd+E,+London,+ON+N6E+2C6&hl=en&z=14&output=embed'
   }
 ];
 
@@ -84,7 +91,7 @@ const LocationsBlock = () => {
               >
                 {locations[0].address}
               </a>
-              <p className="text-[#F06002] text-2xl">{locations[0].hours}</p>
+              <p className="text-[#F06002] text-2xl whitespace-pre-line">{locations[0].hours}</p>
               <a 
                 href={locations[0].phoneUrl}
                 className="text-[#F06002] text-2xl font-bold hover:underline transition-all cursor-pointer"
@@ -112,7 +119,7 @@ const LocationsBlock = () => {
               >
                 {locations[1].address}
               </a>
-              <p className="text-[#F06002] text-2xl">{locations[1].hours}</p>
+              <p className="text-[#F06002] text-2xl whitespace-pre-line">{locations[1].hours}</p>
               <a 
                 href={locations[1].phoneUrl}
                 className="text-[#F06002] text-2xl font-bold hover:underline transition-all cursor-pointer"
@@ -147,6 +154,42 @@ const LocationsBlock = () => {
                   />
                 </div>
               </div>
+            </div>
+          </div>
+
+          {/* Coming Soon */}
+          <div className="flex flex-col items-center text-center w-full max-w-[600px] mx-auto py-8">
+            <h2 className="text-[#F06002] text-5xl md:text-7xl font-arial-black font-bold mb-4">
+              {locations[2].title}
+            </h2>
+            <p className="text-black text-2xl md:text-3xl font-bold font-arial-black mb-2">
+              {locations[2].subtitle}
+            </p>
+            <a
+              href={locations[2].addressUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[#F06002] text-xl md:text-2xl hover:underline transition-all cursor-pointer"
+            >
+              {locations[2].address}
+            </a>
+            <div
+              className="aspect-square rounded-3xl overflow-hidden w-full mt-6"
+              style={{
+                border: '13px solid #F06002',
+                boxShadow: '0px 0px 36.9px 0px #00000066'
+              }}
+            >
+              <iframe
+                src={locations[2].mapUrl}
+                width="100%"
+                height="100%"
+                style={{ border: 0 }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                className="w-full h-full"
+              />
             </div>
           </div>
         </div>
