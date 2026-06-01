@@ -28,7 +28,7 @@ const sides = [
   },
   {
     id: 4,
-    title: 'Grilled Halloumi Cheese',
+    title: 'Halloumi Bites',
     description: '',
     price: '$8',
     imageUrl: '/sides/Layer4.webp'
@@ -39,20 +39,6 @@ const sides = [
     description: '',
     price: '$7',
     imageUrl: '/sides/Layer5.webp'
-  },
-  {
-    id: 6,
-    title: 'Mozzza Sticks',
-    description: '',
-    price: '$7',
-    imageUrl: '/sides/Layer6.webp'
-  },
-  {
-    id: 7,
-    title: 'Crinkle Cut Fries',
-    description: '',
-    price: '$5 S / $8 L',
-    imageUrl: '/sides/Layer8.webp'
   },
   {
     id: 8,
