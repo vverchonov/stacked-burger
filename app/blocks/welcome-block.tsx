@@ -45,10 +45,16 @@ const WelcomeBlock = () => {
       />
 
       {/* Content Overlay */}
-      <div className="absolute hidden sm:flex inset-0 flex-col items-center justify-end pb-24">
-        <div className="text-center">
+      <div className="absolute flex inset-0 flex-col items-center justify-end pb-12 sm:pb-24">
+        <div className="text-center px-4">
+          <h1 className="font-arial-black font-bold text-white leading-none mb-6 sm:mb-10">
+            <span className="text-3xl sm:text-5xl lg:text-6xl">SMASH. </span>
+            <span className="text-5xl sm:text-7xl lg:text-[120px] text-[#F06002]">STACK.</span>
+            <span className="text-3xl sm:text-5xl lg:text-6xl"> SERVE.</span>
+          </h1>
+
           {/* Hungry Button */}
-          <a href="#menu-block" onClick={scrollToMenu}>
+          <a href="#menu-block" onClick={scrollToMenu} className="hidden sm:inline-block">
             <button 
               className="bg-[#1E1E1E] font-baloo text-white px-16 py-6 text-4xl rounded-full
                          transform transition-transform hover:scale-105
