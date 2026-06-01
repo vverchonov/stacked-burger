@@ -5,9 +5,6 @@ import { useState, useEffect, useRef } from 'react';
 import PreloadImages from '../components/preload-images';
 import Modal from '../components/modal';
 
-type SlideDirection = 'next' | 'prev';
-type AnimationPhase = 'idle' | 'exit' | 'enter';
-
 const products = [
   {
     id: 1,
@@ -124,22 +121,21 @@ const products = [
 ];
 
 const MenuBlock = () => {
-  const [currentProduct, setCurrentProduct] = useState(0);
+  const loopedProducts = [products[products.length - 1], ...products, products[0]];
+  const [currentProduct, setCurrentProduct] = useState(1);
   const [autoPlay, setAutoPlay] = useState(true);
-  const [slideDirection, setSlideDirection] = useState<SlideDirection>('next');
-  const [animationPhase, setAnimationPhase] = useState<AnimationPhase>('idle');
+  const [isTransitionEnabled, setIsTransitionEnabled] = useState(true);
+  const [isSliding, setIsSliding] = useState(false);
+  const [fromProduct, setFromProduct] = useState<number | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const isAnimatingRef = useRef(false);
   const autoPlayTimeoutRef = useRef<NodeJS.Timeout | null>(null);
-  const slideTimeoutRef = useRef<NodeJS.Timeout | null>(null);
-  const enterTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const touchStartX = useRef<number>(0);
   const touchEndX = useRef<number>(0);
-  const SLIDE_DURATION_MS = 450;
 
   // Handle touch start
   const handleTouchStart = (e: React.TouchEvent) => {
     touchStartX.current = e.touches[0].clientX;
+    touchEndX.current = e.touches[0].clientX;
   };
 
   // Handle touch move
@@ -155,12 +151,16 @@ const MenuBlock = () => {
     if (Math.abs(swipeDistance) > swipeThreshold) {
       if (swipeDistance > 0) {
         // Swipe right - show previous
-        prevProduct();
+        prevProduct(true);
       } else {
         // Swipe left - show next
-        nextProduct();
+        nextProduct(true);
       }
     }
+
+    // Reset gesture points so each swipe only triggers once.
+    touchStartX.current = 0;
+    touchEndX.current = 0;
   };
 
   // Clear the auto-play resume timeout
@@ -179,59 +179,28 @@ const MenuBlock = () => {
     }, 5000); // 5 seconds
   };
 
-  const clearSlideTimeouts = () => {
-    if (slideTimeoutRef.current) {
-      clearTimeout(slideTimeoutRef.current);
-      slideTimeoutRef.current = null;
-    }
-
-    if (enterTimeoutRef.current) {
-      clearTimeout(enterTimeoutRef.current);
-      enterTimeoutRef.current = null;
-    }
-  };
-
-  const transitionProduct = (direction: SlideDirection, pauseAutoPlay: boolean) => {
-    if (isAnimatingRef.current) {
-      return;
-    }
+  const nextProduct = (pauseAutoPlay: boolean) => {
+    if (isSliding) return;
 
     if (pauseAutoPlay) {
       setAutoPlay(false);
       setupAutoPlayResume();
     }
-
-    isAnimatingRef.current = true;
-    setSlideDirection(direction);
-    setAnimationPhase('exit');
-
-    slideTimeoutRef.current = setTimeout(() => {
-      setCurrentProduct((prev) => {
-        if (direction === 'next') {
-          return (prev + 1) % products.length;
-        }
-
-        return (prev - 1 + products.length) % products.length;
-      });
-      setAnimationPhase('enter');
-
-      enterTimeoutRef.current = setTimeout(() => {
-        setAnimationPhase('idle');
-        isAnimatingRef.current = false;
-      }, SLIDE_DURATION_MS);
-    }, SLIDE_DURATION_MS);
+    setFromProduct(currentProduct);
+    setIsSliding(true);
+    setCurrentProduct((prev) => prev + 1);
   };
 
-  const getSlideClass = () => {
-    if (animationPhase === 'exit') {
-      return slideDirection === 'next' ? 'animate-slideOutToLeft' : 'animate-slideOutToRight';
-    }
+  const prevProduct = (pauseAutoPlay: boolean) => {
+    if (isSliding) return;
 
-    if (animationPhase === 'enter') {
-      return slideDirection === 'next' ? 'animate-slideInFromRight' : 'animate-slideInFromLeft';
+    if (pauseAutoPlay) {
+      setAutoPlay(false);
+      setupAutoPlayResume();
     }
-
-    return '';
+    setFromProduct(currentProduct);
+    setIsSliding(true);
+    setCurrentProduct((prev) => prev - 1);
   };
 
   useEffect(() => {
@@ -239,7 +208,7 @@ const MenuBlock = () => {
     
     if (autoPlay) {
       intervalId = setInterval(() => {
-        transitionProduct('next', false);
+        nextProduct(false);
       }, 5000);
     }
 
@@ -254,16 +223,44 @@ const MenuBlock = () => {
   useEffect(() => {
     return () => {
       clearAutoPlayTimeout();
-      clearSlideTimeouts();
     };
   }, []);
 
-  const nextProduct = () => {
-    transitionProduct('next', true);
+  const handleTrackTransitionEnd = () => {
+    if (currentProduct === 0) {
+      setIsTransitionEnabled(false);
+      setCurrentProduct(products.length);
+      return;
+    }
+
+    if (currentProduct === loopedProducts.length - 1) {
+      setIsTransitionEnabled(false);
+      setCurrentProduct(1);
+      return;
+    }
+
+    setIsSliding(false);
+    setFromProduct(null);
   };
 
-  const prevProduct = () => {
-    transitionProduct('prev', true);
+  useEffect(() => {
+    if (!isTransitionEnabled) {
+      const frame = requestAnimationFrame(() => {
+        setIsTransitionEnabled(true);
+        setIsSliding(false);
+        setFromProduct(null);
+      });
+
+      return () => cancelAnimationFrame(frame);
+    }
+  }, [isTransitionEnabled]);
+
+  const isSlideVisible = (index: number) => {
+    if (!isSliding || fromProduct === null) {
+      return index === currentProduct;
+    }
+
+    return index === fromProduct || index === currentProduct;
   };
 
   return (
@@ -291,7 +288,7 @@ const MenuBlock = () => {
       {/* Navigation Arrows - Moved outside */}
       <div className="relative w-full max-w-[1400px]">
         <button 
-          onClick={prevProduct}
+          onClick={() => prevProduct(true)}
           className="hidden lg:block absolute left-0 top-1/2 -translate-y-1/2 text-white z-10"
         >
           <div className="flex items-center text-8xl font-bold hover:text-[#F06002] transition-colors">
@@ -299,7 +296,7 @@ const MenuBlock = () => {
           </div>
         </button>
         <button 
-          onClick={nextProduct}
+          onClick={() => nextProduct(true)}
           className="hidden lg:block absolute right-0 top-1/2 -translate-y-1/2 text-white z-10"
         >
           <div className="flex items-center text-8xl font-bold hover:text-[#F06002] transition-colors">
@@ -317,77 +314,82 @@ const MenuBlock = () => {
             onTouchStart={handleTouchStart}
             onTouchMove={handleTouchMove}
             onTouchEnd={handleTouchEnd}
+            onTouchCancel={handleTouchEnd}
           >
             {/* Product Carousel */}
             <div className="relative h-full w-full px-6 md:px-12 overflow-hidden">
-              {/* Product Content Container */}
-              <div className="flex flex-col lg:flex-row h-full">
-                {/* Left Side - Product Info */}
-                <div className="w-full lg:w-5/12 lg:order-1 flex flex-col px-4 lg:px-0">
-                  <div className="flex-1 flex flex-col lg:mt-24 h-full overflow-hidden">
-                    <div 
-                      key={currentProduct}
-                      className={getSlideClass()}
-                    >
-                      <h3 className="text-white text-4xl font-arial-black sm:text-5xl lg:text-6xl xl:text-7xl font-bold mb-4 lg:mb-6">
-                        {products[currentProduct].title}
-                      </h3>
-                      <p className="text-white lg:ps-16 text-lg lg:mt-16 sm:text-xl lg:text-2xl xl:text-3xl max-w-lg mb-4 lg:mb-8">
-                        {products[currentProduct].description}
-                      </p>
-                      {/* <p className="text-white lg:ps-16 font-arial-black text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold">
-                        ${products[currentProduct].price}
-                        <span className="text-xl sm:text-2xl font-arial-black lg:text-3xl xl:text-4xl ml-2 lg:ml-4">
-                          (Combo ${products[currentProduct].comboPrice})
-                        </span>
-                      </p> */}
+              {/* Mobile Navigation Arrows */}
+              <button
+                onClick={() => prevProduct(true)}
+                className="lg:hidden absolute left-0 top-1/2 -translate-y-1/2 text-white z-20 p-2 bg-black/20 rounded-full hover:bg-black/40"
+              >
+                <div className="flex items-center text-5xl font-bold hover:text-[#F06002] transition-colors">
+                  <span className="transform scale-y-150">«</span>
+                </div>
+              </button>
+              <button
+                onClick={() => nextProduct(true)}
+                className="lg:hidden absolute right-0 top-1/2 -translate-y-1/2 text-white z-20 p-2 bg-black/20 rounded-full hover:bg-black/40"
+              >
+                <div className="flex items-center text-5xl font-bold hover:text-[#F06002] transition-colors">
+                  <span className="transform scale-y-150">»</span>
+                </div>
+              </button>
+
+              <div
+                className={`flex h-full ease-out ${isTransitionEnabled ? 'transition-transform duration-500' : ''}`}
+                style={{
+                  width: `${loopedProducts.length * 100}%`,
+                  transform: `translateX(-${currentProduct * (100 / loopedProducts.length)}%)`,
+                }}
+                onTransitionEnd={handleTrackTransitionEnd}
+              >
+                {loopedProducts.map((product, index) => (
+                  <div
+                    key={`${product.id}-${index}`}
+                    className={`h-full min-w-0 shrink-0 overflow-hidden ${
+                      isSlideVisible(index) ? 'visible' : 'invisible'
+                    }`}
+                    style={{ width: `${100 / loopedProducts.length}%` }}
+                  >
+                    {/* Product Content Container */}
+                    <div className="flex flex-col lg:flex-row h-full">
+                      {/* Left Side - Product Info */}
+                      <div className="w-full lg:w-5/12 lg:order-1 flex flex-col px-4 lg:px-0">
+                        <div className="flex-1 flex flex-col lg:mt-24 h-full overflow-hidden">
+                          <h3 className="text-white text-4xl font-arial-black sm:text-5xl lg:text-6xl xl:text-7xl font-bold mb-4 lg:mb-6">
+                            {product.title}
+                          </h3>
+                          <p className="text-white lg:ps-16 text-lg lg:mt-16 sm:text-xl lg:text-2xl xl:text-3xl max-w-lg mb-4 lg:mb-8">
+                            {product.description}
+                          </p>
+                        </div>
+                    </div>
+
+                      {/* Product Image */}
+                      <div className="w-full lg:w-7/12 lg:order-2 flex items-center justify-center mb-0 lg:mb-0">
+                        <div className="relative w-full">
+                          <div className="relative w-full aspect-square rounded-[32px] lg:rounded-[48px]">
+                            <Image
+                              src={product.imageUrl}
+                              alt={product.title}
+                              fill
+                              priority
+                              loading="eager"
+                              className="object-contain bg-transparent"
+                            />
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
-                </div>
-
-                {/* Product Image */}
-                <div className="w-full lg:w-7/12 lg:order-2 flex items-center justify-center mb-0 lg:mb-0">
-                  <div className="relative w-full">
-                    {/* Mobile Navigation Arrows */}
-                    <button 
-                      onClick={prevProduct}
-                      className="lg:hidden absolute left-[-10px] top-1/2 -translate-y-1/2 text-white z-10 p-2 bg-black/20 rounded-full hover:bg-black/40"
-                    >
-                      <div className="flex items-center text-5xl font-bold hover:text-[#F06002] transition-colors">
-                        <span className="transform scale-y-150">«</span>
-                      </div>
-                    </button>
-                    <button 
-                      onClick={nextProduct}
-                      className="lg:hidden absolute right-[-10px] top-1/2 -translate-y-1/2 text-white z-10 p-2 bg-black/20 rounded-full hover:bg-black/40"
-                    >
-                      <div className="flex items-center text-5xl font-bold hover:text-[#F06002] transition-colors">
-                        <span className="transform scale-y-150">»</span>
-                      </div>
-                    </button>
-
-                    <div 
-                      key={`img-${currentProduct}`}
-                      className="relative w-full aspect-square rounded-[32px] lg:rounded-[48px] 
-                                will-change-transform will-change-opacity"
-                    >
-                      <Image
-                        src={products[currentProduct].imageUrl}
-                        alt={products[currentProduct].title}
-                        fill
-                        priority
-                        loading="eager"
-                        className={`object-contain bg-transparent ${getSlideClass()}`}
-                      />
-                    </div>
-                  </div>
-                </div>
+                ))}
               </div>
             </div>
 
             {/* Order Now Button */}
             {/* Order Now Button - stop touch propagation so carousel swipe doesn't steal taps on mobile */}
-            <div className="relative lg:absolute bottom-0 lg:bottom-6 left-0 lg:left-12 w-full lg:w-auto px-6 lg:px-0 pb-6 lg:pb-0 mt-8 lg:mt-0">
+            <div className="relative lg:absolute bottom-0 lg:bottom-6 left-0 lg:left-12 w-full lg:w-auto px-6 lg:px-0 pb-6 lg:pb-0 mt-0">
               <button 
                 onClick={() => setIsModalOpen(true)}
                 onTouchStart={(e) => e.stopPropagation()}
