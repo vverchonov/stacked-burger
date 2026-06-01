@@ -7,8 +7,7 @@ interface ModalProps {
   onClose: () => void;
 }
 
-const DELIVERY_URL =
-  'https://www.ubereats.com/store/stacked-burger-%26-chicken/XktmNg6fVmedzVpHywQWPA?diningMode=DELIVERY&pl=JTdCJTIyYWRkcmVzcyUyMiUzQSUyMjM1NSUyMFNhbmRyaW5naGFtJTIwQ3Jlc2NlbnQlMjAlMjM0OCUyMiUyQyUyMnJlZmVyZW5jZSUyMiUzQSUyMkVqZ3pOVFVnVTJGdVpISnBibWRvWVcwZ1EzSmxjMk5sYm5RZ0l6UTRMQ0JNYjI1a2IyNHNJRTlPSUU0MlF5QTFTek1zSUVOaGJtRmtZU0llR2h3S0Znb1VDaElKTi1qSUpyYnpMb2dSV3VmLTBmc3ZsS2NTQWpRNCUyMiUyQyUyMnJlZmVyZW5jZVR5cGUlMjIlM0ElMjJnb29nbGVfcGxhY2VzJTIyJTJDJTIybGF0aXR1ZGUlMjIlM0E0Mi45NDgyMTI4JTJDJTIybG9uZ2l0dWRlJTIyJTNBLTgxLjIyOTY0NzglN0Q%3D&utm_source=menu-maker';
+const DELIVERY_URL = 'https://www.order.store/brand/stacked-burger-chicken';
 
 const PICKUP_LOCATIONS = [
   {
