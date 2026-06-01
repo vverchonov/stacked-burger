@@ -5,6 +5,9 @@ import { useState, useEffect, useRef } from 'react';
 import PreloadImages from '../components/preload-images';
 import Modal from '../components/modal';
 
+type SlideDirection = 'next' | 'prev';
+type AnimationPhase = 'idle' | 'exit' | 'enter';
+
 const products = [
   {
     id: 1,
@@ -123,11 +126,16 @@ const products = [
 const MenuBlock = () => {
   const [currentProduct, setCurrentProduct] = useState(0);
   const [autoPlay, setAutoPlay] = useState(true);
-  const [, setSlideDirection] = useState('next'); // 'next' or 'prev'
+  const [slideDirection, setSlideDirection] = useState<SlideDirection>('next');
+  const [animationPhase, setAnimationPhase] = useState<AnimationPhase>('idle');
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const isAnimatingRef = useRef(false);
   const autoPlayTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const slideTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const enterTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const touchStartX = useRef<number>(0);
   const touchEndX = useRef<number>(0);
+  const SLIDE_DURATION_MS = 450;
 
   // Handle touch start
   const handleTouchStart = (e: React.TouchEvent) => {
@@ -171,13 +179,67 @@ const MenuBlock = () => {
     }, 5000); // 5 seconds
   };
 
+  const clearSlideTimeouts = () => {
+    if (slideTimeoutRef.current) {
+      clearTimeout(slideTimeoutRef.current);
+      slideTimeoutRef.current = null;
+    }
+
+    if (enterTimeoutRef.current) {
+      clearTimeout(enterTimeoutRef.current);
+      enterTimeoutRef.current = null;
+    }
+  };
+
+  const transitionProduct = (direction: SlideDirection, pauseAutoPlay: boolean) => {
+    if (isAnimatingRef.current) {
+      return;
+    }
+
+    if (pauseAutoPlay) {
+      setAutoPlay(false);
+      setupAutoPlayResume();
+    }
+
+    isAnimatingRef.current = true;
+    setSlideDirection(direction);
+    setAnimationPhase('exit');
+
+    slideTimeoutRef.current = setTimeout(() => {
+      setCurrentProduct((prev) => {
+        if (direction === 'next') {
+          return (prev + 1) % products.length;
+        }
+
+        return (prev - 1 + products.length) % products.length;
+      });
+      setAnimationPhase('enter');
+
+      enterTimeoutRef.current = setTimeout(() => {
+        setAnimationPhase('idle');
+        isAnimatingRef.current = false;
+      }, SLIDE_DURATION_MS);
+    }, SLIDE_DURATION_MS);
+  };
+
+  const getSlideClass = () => {
+    if (animationPhase === 'exit') {
+      return slideDirection === 'next' ? 'animate-slideOutToLeft' : 'animate-slideOutToRight';
+    }
+
+    if (animationPhase === 'enter') {
+      return slideDirection === 'next' ? 'animate-slideInFromRight' : 'animate-slideInFromLeft';
+    }
+
+    return '';
+  };
+
   useEffect(() => {
     let intervalId: NodeJS.Timeout;
     
     if (autoPlay) {
       intervalId = setInterval(() => {
-        setSlideDirection('next');
-        setCurrentProduct((prev) => (prev + 1) % products.length);
+        transitionProduct('next', false);
       }, 5000);
     }
 
@@ -192,21 +254,16 @@ const MenuBlock = () => {
   useEffect(() => {
     return () => {
       clearAutoPlayTimeout();
+      clearSlideTimeouts();
     };
   }, []);
 
   const nextProduct = () => {
-    setAutoPlay(false);
-    setSlideDirection('next');
-    setCurrentProduct((prev) => (prev + 1) % products.length);
-    setupAutoPlayResume();
+    transitionProduct('next', true);
   };
 
   const prevProduct = () => {
-    setAutoPlay(false);
-    setSlideDirection('prev');
-    setCurrentProduct((prev) => (prev - 1 + products.length) % products.length);
-    setupAutoPlayResume();
+    transitionProduct('prev', true);
   };
 
   return (
@@ -270,7 +327,7 @@ const MenuBlock = () => {
                   <div className="flex-1 flex flex-col lg:mt-24 h-full overflow-hidden">
                     <div 
                       key={currentProduct}
-                      className="animate-textFadeIn"
+                      className={getSlideClass()}
                     >
                       <h3 className="text-white text-4xl font-arial-black sm:text-5xl lg:text-6xl xl:text-7xl font-bold mb-4 lg:mb-6">
                         {products[currentProduct].title}
@@ -312,7 +369,7 @@ const MenuBlock = () => {
                     <div 
                       key={`img-${currentProduct}`}
                       className="relative w-full aspect-square rounded-[32px] lg:rounded-[48px] 
-                                animate-textFadeIn"
+                                will-change-transform will-change-opacity"
                     >
                       <Image
                         src={products[currentProduct].imageUrl}
@@ -320,7 +377,7 @@ const MenuBlock = () => {
                         fill
                         priority
                         loading="eager"
-                        className="object-contain bg-transparent"
+                        className={`object-contain bg-transparent ${getSlideClass()}`}
                       />
                     </div>
                   </div>
