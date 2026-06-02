@@ -1,14 +1,18 @@
 'use client';
 
 import Image from 'next/image';
+import { useState } from 'react';
+import Modal from '../components/modal';
 
 const WelcomeBlock = () => {
-  const scrollToMenu = (e: React.MouseEvent) => {
-    e.preventDefault();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleHungryClick = () => {
     const ourMenu = document.getElementById('our-menu');
     if (ourMenu) {
       ourMenu.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
+    setIsModalOpen(true);
   };
 
   return (
@@ -54,20 +58,22 @@ const WelcomeBlock = () => {
           </h1>
 
           {/* Hungry Button */}
-          <a href="#our-menu" onClick={scrollToMenu} className="hidden sm:inline-block">
-            <button 
-              className="bg-[#1E1E1E] font-baloo text-white px-16 py-6 text-4xl rounded-full
-                         transform transition-transform hover:scale-105
-                         border-2 border-[#FF6B35] hover:bg-[#FF6B35] font-bold"
-              style={{
-                boxShadow: '0px 0px 17.6px 0px #F76302B5'
-              }}
-            >
-              HUNGRY?
-            </button>
-          </a>
+          <button
+            type="button"
+            onClick={handleHungryClick}
+            className="hidden sm:inline-block bg-[#1E1E1E] font-baloo text-white px-16 py-6 text-4xl rounded-full
+                       transform transition-transform hover:scale-105
+                       border-2 border-[#FF6B35] hover:bg-[#FF6B35] font-bold"
+            style={{
+              boxShadow: '0px 0px 17.6px 0px #F76302B5',
+            }}
+          >
+            HUNGRY?
+          </button>
         </div>
       </div>
+
+      <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </div>
   );
 };
