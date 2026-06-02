@@ -5,9 +5,9 @@ import Image from 'next/image';
 const WelcomeBlock = () => {
   const scrollToMenu = (e: React.MouseEvent) => {
     e.preventDefault();
-    const menuBlock = document.getElementById('menu-block');
-    if (menuBlock) {
-      menuBlock.scrollIntoView({ behavior: 'smooth' });
+    const ourMenu = document.getElementById('our-menu');
+    if (ourMenu) {
+      ourMenu.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
   };
 
@@ -54,7 +54,7 @@ const WelcomeBlock = () => {
           </h1>
 
           {/* Hungry Button */}
-          <a href="#menu-block" onClick={scrollToMenu} className="hidden sm:inline-block">
+          <a href="#our-menu" onClick={scrollToMenu} className="hidden sm:inline-block">
             <button 
               className="bg-[#1E1E1E] font-baloo text-white px-16 py-6 text-4xl rounded-full
                          transform transition-transform hover:scale-105

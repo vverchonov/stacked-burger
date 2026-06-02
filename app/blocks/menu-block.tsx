@@ -280,7 +280,10 @@ const MenuBlock = () => {
 
       {/* Menu Title */}
       <div className="w-full max-w-6xl mx-auto px-4 md:px-8">
-        <h2 className="text-white text-right mb-[-10px] md:mb-[-30px] font-arial-black text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-semibold">
+        <h2
+          id="our-menu"
+          className="text-white text-right mb-[-10px] md:mb-[-30px] font-arial-black text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-semibold scroll-mt-24"
+        >
           OUR MENU
         </h2>
       </div>

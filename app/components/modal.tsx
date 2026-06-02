@@ -102,7 +102,7 @@ const Modal = ({ isOpen, onClose }: ModalProps) => {
               </h2>
               <div className="flex flex-col gap-4">
                 <button type="button" onClick={handleDelivery} className={buttonClass}>
-                  DELIVERY
+                  DELIVERY (Uber Eats)
                 </button>
                 <button
                   type="button"
