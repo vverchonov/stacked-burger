@@ -14,7 +14,7 @@ const WeAreBlock = () => {
             </h2>
             
             <p className="text-[#F06002] text-2xl leading-relaxed">
-            Voted Best Burger at Burger Fest 2024, Stacked Burger & Chicken is committed to delivering exceptional taste and quality. Our passion for crafting delicious smash burgers and chicken sandwiches has made us a favourite among food enthusiasts. 
+            Voted Best Burger at Burger Fest 2024/2025, Stacked Burger & Chicken is committed to delivering exceptional taste and quality. Our passion for crafting delicious smash burgers and chicken sandwiches has made us a favourite among food enthusiasts. 
             </p>
 
             {/* Stick Figure Illustration */}
