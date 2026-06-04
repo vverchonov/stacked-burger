@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { toast } from 'react-toastify';
+import { reportLeadFormConversion } from '../../lib/gtag';
 
 const InterestedBlock = () => {
   const [formData, setFormData] = useState({
@@ -61,6 +62,7 @@ const InterestedBlock = () => {
       });
 
       if (response.ok) {
+        reportLeadFormConversion();
         // Clear form
         setFormData({
           firstName: '',

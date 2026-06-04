@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { toast } from 'react-toastify';
+import { reportLeadFormConversion } from '../lib/gtag';
 
 const ContactBlock = () => {
   const [formData, setFormData] = useState({
@@ -34,6 +35,7 @@ const ContactBlock = () => {
       });
       
       if (response.ok) {
+        reportLeadFormConversion();
         // Clear form
         setFormData({
           name: '',
