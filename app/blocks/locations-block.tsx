@@ -25,11 +25,12 @@ const locations = [
     mapUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2918.4320692921933!2d-81.275161!3d42.9902358!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x882ef1890fd1d6b7%3A0xb24ec1f8b8dbc57!2sStacked%20Burger%20Cherryhill!5e0!3m2!1sen!2sca!4v1740089332554!5m2!1sen!2sca'
   },
   {
-    title: 'COMING SOON',
+    title: 'NOW OPEN',
     subtitle: '775 Southdale Rd E (South)',
     address: '775 Southdale Rd E, London, ON N6E 2C6',
     addressUrl: 'https://maps.google.com/?q=775+Southdale+Rd+E,+London,+ON+N6E+2C6',
-    mapUrl: 'https://maps.google.com/maps?q=775+Southdale+Rd+E,+London,+ON+N6E+2C6&hl=en&z=14&output=embed'
+    hours: 'Monday - Wednesday: 11am-10pm\nThursday - Sunday: 11am-11pm',
+    mapUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d37942.26404803994!2d-81.22327765513288!3d42.96723233829629!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x882ef3f780c7d2af%3A0x6fee4526722d3fb4!2sStacked%20Burger%20and%20Chicken%20-%20Southdale!5e0!3m2!1sen!2sua!4v1788940955458!5m2!1sen!2sua'
   }
 ];
 
@@ -183,6 +184,9 @@ const LocationsBlock = () => {
             >
               {locations[2].address}
             </a>
+            <p className="text-[#F06002] text-xl md:text-2xl whitespace-pre-line mt-2">
+              {locations[2].hours}
+            </p>
             <div
               className="aspect-square rounded-3xl overflow-hidden w-full mt-6"
               style={{
