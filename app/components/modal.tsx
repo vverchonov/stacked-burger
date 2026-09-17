@@ -21,9 +21,9 @@ const PICKUP_LOCATIONS = [
     available: true,
   },
   {
-    label: 'COMING SOON',
-    sublabel: '775 Southdale Rd E (South)',
-    available: false,
+    label: '775 SOUTHDALE RD E (South)',
+    href: 'https://order.toasttab.com/online/stacked-burger-nro-775-southdale-unit-1a',
+    available: true,
   },
 ] as const;
 
