@@ -9,7 +9,20 @@ interface ModalProps {
 
 const DELIVERY_URL = 'https://www.order.store/brand/stacked-burger-chicken';
 
-const PICKUP_LOCATIONS = [
+type PickupLocation =
+  | {
+      label: string;
+      href: string;
+      available: true;
+      sublabel?: string;
+    }
+  | {
+      label: string;
+      available: false;
+      sublabel?: string;
+    };
+
+const PICKUP_LOCATIONS: PickupLocation[] = [
   {
     label: '125 KING STREET (Downtown)',
     href: 'https://order.toasttab.com/online/stacked-burger-and-chicken-125-king-st?diningOption=takeout&rwg_token=AFd1xnGovGh-m9XCF1HbrtYHvoT2a8XgzG9LCPe2vNj0SzlOaYNDUNENCTQfMFQQjv3Ssp3nGLPvLbW-5BVZNshYNi8qAhbAAg%3D%3D',
@@ -25,7 +38,7 @@ const PICKUP_LOCATIONS = [
     href: 'https://order.toasttab.com/online/stacked-burger-nro-775-southdale-unit-1a',
     available: true,
   },
-] as const;
+];
 
 const buttonClass =
   'w-full bg-white text-black text-center py-3 sm:py-4 px-4 sm:px-6 rounded-full font-bold text-base sm:text-lg hover:bg-opacity-90 transition-all duration-300';
@@ -156,9 +169,9 @@ const Modal = ({ isOpen, onClose }: ModalProps) => {
                       aria-disabled="true"
                     >
                       <span>{location.label}</span>
-                      {'sublabel' in location && (
+                      {location.sublabel ? (
                         <span className="text-sm font-normal">{location.sublabel}</span>
-                      )}
+                      ) : null}
                     </div>
                   )
                 )}
